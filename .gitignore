@@ -1,5 +1,9 @@
-# Prerequisites
-*.d
+# Clion
+.idea/
+cmake-build-*/
+
+# Visual Studio
+ide/VS*/
 
 # Compiled Object files
 *.slo
