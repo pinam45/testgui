@@ -1,0 +1,31 @@
+diff --git a/gl3w_gen.py b/gl3w_gen.py
+index 1a8828a..85cd962 100755
+--- a/gl3w_gen.py
++++ b/gl3w_gen.py
+@@ -39,6 +39,13 @@ try:
+ except ImportError:
+     import urllib2
+ 
++import ssl
++try:
++    import certifi
++    has_certifi = True
++except ImportError:
++    has_certifi = False
++
+ # UNLICENSE copyright header
+ UNLICENSE = r'''/*
+  * This file was generated with gl3w_gen.py, part of gl3w
+@@ -88,7 +95,11 @@ def download(url, dst):
+         return
+ 
+     print('Downloading {0}...'.format(dst))
+-    web = urllib2.urlopen(urllib2.Request(url, headers={'User-Agent': 'Mozilla/5.0'}))
++    if has_certifi:
++        context = ssl.create_default_context(cafile=certifi.where())
++    else:
++        context = ssl.create_default_context()
++    web = urllib2.urlopen(urllib2.Request(url, headers={'User-Agent': 'Mozilla/5.0'}), context=context)
+     with open(dst, 'wb') as f:
+         f.writelines(web.readlines())
+ 
