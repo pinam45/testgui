@@ -24,8 +24,24 @@ include(FetchContent)
 # Set CMake modules path
 list(APPEND
   CMAKE_MODULE_PATH
+  "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules"
   "${CMAKE_CURRENT_SOURCE_DIR}/external"
 )
+
+# Flags module
+include(flags)
+
+# setup sanitize build types
+string(TOUPPER ${CMAKE_BUILD_TYPE} build_type)
+if(build_type STREQUAL "ASAN")
+    setup_asan_flags()
+elseif(build_type STREQUAL "UBSAN")
+    setup_ubsan_flags()
+elseif(build_type STREQUAL "TSAN")
+    setup_tsan_flags()
+elseif(build_type STREQUAL "SANITIZE")
+    setup_sanitize_flags()
+endif()
 
 # Disable in source build
 set(CMAKE_DISABLE_SOURCE_CHANGES ON)
@@ -96,6 +112,7 @@ target_link_libraries(
   fonts::fonts
 )
 
+# Set log level
 target_compile_definitions(
   testgui PRIVATE
   SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_TRACE
@@ -103,3 +120,6 @@ target_compile_definitions(
 
 # Build in C++17
 target_compile_features(testgui PRIVATE cxx_std_17)
+
+# Add warning flags
+target_add_cxx_warning_flags(testgui)
