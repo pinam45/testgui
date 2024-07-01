@@ -73,6 +73,7 @@ include(utfcpp)
 include(scope_guard)
 include(sigslots)
 include(fonts)
+include(expected)
 
 # Declare target
 add_executable(testgui)
@@ -110,6 +111,7 @@ target_link_libraries(
   scope_guard::scope_guard
   Pal::Sigslot
   fonts::fonts
+  tl::expected
 )
 
 # Set log level
