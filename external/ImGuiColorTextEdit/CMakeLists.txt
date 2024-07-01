@@ -19,7 +19,7 @@ FetchContent_Populate(
   GIT_TAG "fb08648c87f5c872c268e11708ee518d60ed3e8e"
   #GIT_SHALLOW ON
   GIT_PROGRESS ON
-  PATCH_COMMAND git apply "${CMAKE_CURRENT_SOURCE_DIR}/fix.patch" || git status #FIXME
+  PATCH_COMMAND git apply --whitespace=fix "${CMAKE_CURRENT_SOURCE_DIR}/fix.patch" || git status #FIXME
   # https://gitlab.kitware.com/cmake/cmake/-/issues/21146
 )
 
