@@ -74,6 +74,7 @@ include(scope_guard)
 include(sigslots)
 include(fonts)
 include(expected)
+include(PlatformFolders)
 
 # Declare target
 add_executable(testgui)
@@ -112,6 +113,7 @@ target_link_libraries(
   Pal::Sigslot
   fonts::fonts
   tl::expected
+  sago::platform_folders
 )
 
 # Set log level
