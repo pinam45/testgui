@@ -16,7 +16,7 @@
 
 namespace style
 {
-    [[nodiscard, gnu::const]] constexpr uint8_t float_to_byte(float f) noexcept
+    [[nodiscard, gnu::const]] constexpr uint8_t byte_from_float(float f) noexcept
     {
         return static_cast<uint8_t>(std::clamp(f, 0.f, 1.f) * 255.f + 0.5f);
     }
@@ -32,7 +32,7 @@ namespace style
 
     [[nodiscard, gnu::const]] constexpr ImU32 ImU32_from_floats(float r, float g, float b, float a = 1.f) noexcept
     {
-        return ImU32_from_bytes(float_to_byte(r), float_to_byte(g), float_to_byte(b), float_to_byte(a));
+        return ImU32_from_bytes(byte_from_float(r), byte_from_float(g), byte_from_float(b), byte_from_float(a));
     }
 
     [[nodiscard, gnu::const]] constexpr ImU32 ImU32_from_ImVec4(const ImVec4& v) noexcept

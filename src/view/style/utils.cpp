@@ -27,7 +27,7 @@ namespace
 
     std::string colortxt256(const ImVec4& color) noexcept
     {
-        return fmt::format("{}, {}, {}, {}", style::float_to_byte(color.x), style::float_to_byte(color.y), style::float_to_byte(color.z), style::float_to_byte(color.w));
+        return fmt::format("{}, {}, {}, {}", style::byte_from_float(color.x), style::byte_from_float(color.y), style::byte_from_float(color.z), style::byte_from_float(color.w));
     }
 
     std::string colortxt256(ImU32 color) noexcept
