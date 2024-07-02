@@ -16,6 +16,7 @@
 #include <tmpicons.hpp>
 #include <utils/log.hpp>
 #include <utils/thread_pool.hpp>
+#include <view/components/ImSpinnerDemo.hpp>
 #include <view/components/InterfaceStyleEditor.hpp>
 #include <view/components/LogViewer.hpp>
 #include <view/components/TextEditorDemo.hpp>
@@ -139,6 +140,8 @@ int main()
         text_editor_demo.content.set_palette(style_info.palette);
     });
     SCOPE_EXIT { con.disconnect(); };
+
+    Window<ImSpinnerDemo> imspinner_demo("ImSpinner Demo");
 
     // background tasks
     thread_pool tp(8);
@@ -279,6 +282,7 @@ int main()
                 ImGui::DockBuilderDockWindow("Dear ImGui Demo", dock_main_id);
                 ImGui::DockBuilderDockWindow("ImPlot Demo", dock_main_id);
                 ImGui::DockBuilderDockWindow("Text Editor Demo", dock_main_id);
+                ImGui::DockBuilderDockWindow("ImSpinner Demo", dock_main_id);
                 ImGui::DockBuilderDockWindow("Text editor style", dock_id_right);
                 ImGui::DockBuilderDockWindow("Interface style", dock_id_right);
                 ImGui::DockBuilderDockWindow("Test", dock_id_right);
@@ -307,6 +311,12 @@ int main()
         if(text_editor_demo.open)
         {
             text_editor_demo.show();
+        }
+
+        // ImSpinner Demo
+        if(imspinner_demo.open)
+        {
+            imspinner_demo.show();
         }
 
         // Log viewer

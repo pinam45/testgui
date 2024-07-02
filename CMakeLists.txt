@@ -66,6 +66,7 @@ include(opengl)
 include(imgui)
 include(implot)
 include(impop)
+include(imspinner)
 include(ImGuiColorTextEdit)
 include(nlohmann_json)
 include(spdlog)
@@ -105,6 +106,7 @@ target_link_libraries(
   imgui::imgui
   implot::implot
   impop::impop
+  imspinner::imspinner
   ImGuiColorTextEdit::ImGuiColorTextEdit
   nlohmann_json::nlohmann_json
   spdlog::spdlog
