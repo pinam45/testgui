@@ -145,7 +145,7 @@ void TextEditorStyleEditor::print() noexcept
         ImGui::SetNextItemWidth(ImGui::CalcTextSize("[0.0, 1.0]").x + ImGui::GetFrameHeight() + ImGui::GetStyle().FramePadding.x * 2.0f);
         ImGui::Combo("##_export_style", &_export_style, "[0, 255]\0[0.0, 1.0]\0");
 
-        ImGui::BeginChild("##colors", ImVec2(0, -(ImGui::GetFrameHeightWithSpacing() + ImGui::GetStyle().ItemSpacing.y)), ImGuiChildFlags_Border, ImGuiWindowFlags_AlwaysVerticalScrollbar | ImGuiWindowFlags_NavFlattened);
+        ImGui::BeginChild("##colors", ImVec2(0, -(ImGui::GetFrameHeightWithSpacing() + ImGui::GetStyle().ItemSpacing.y)), ImGuiChildFlags_Border | ImGuiChildFlags_NavFlattened, ImGuiWindowFlags_AlwaysVerticalScrollbar);
         {
             SCOPE_EXIT { ImGui::EndChild(); };
             ImGui::PushItemWidth(ImGui::GetFontSize() * -18);

@@ -16,7 +16,7 @@ FetchContent_Populate(
   BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/imgui-build"
   SUBBUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/imgui-subbuild"
   GIT_REPOSITORY "https://github.com/ocornut/imgui"
-  GIT_TAG "6d948ab47ecf984239af01434f3ed03808dbf188"
+  GIT_TAG "v1.90.9-docking"
   GIT_SHALLOW ON
   GIT_PROGRESS ON
 )

@@ -59,9 +59,9 @@ namespace
         colors[ImGuiCol_ResizeGripActive] = ImVec4(1.000f, 0.391f, 0.000f, 1.000f);
         colors[ImGuiCol_Tab] = ImVec4(0.098f, 0.098f, 0.098f, 1.000f);
         colors[ImGuiCol_TabHovered] = ImVec4(0.352f, 0.352f, 0.352f, 1.000f);
-        colors[ImGuiCol_TabActive] = ImVec4(0.195f, 0.195f, 0.195f, 1.000f);
-        colors[ImGuiCol_TabUnfocused] = ImVec4(0.098f, 0.098f, 0.098f, 1.000f);
-        colors[ImGuiCol_TabUnfocusedActive] = ImVec4(0.195f, 0.195f, 0.195f, 1.000f);
+        colors[ImGuiCol_TabSelected] = ImVec4(0.195f, 0.195f, 0.195f, 1.000f);
+        colors[ImGuiCol_TabDimmed] = ImVec4(0.098f, 0.098f, 0.098f, 1.000f);
+        colors[ImGuiCol_TabDimmedSelected] = ImVec4(0.195f, 0.195f, 0.195f, 1.000f);
         colors[ImGuiCol_DockingPreview] = ImVec4(1.000f, 0.391f, 0.000f, 0.781f);
         colors[ImGuiCol_DockingEmptyBg] = ImVec4(0.180f, 0.180f, 0.180f, 1.000f);
         colors[ImGuiCol_PlotLines] = ImVec4(0.469f, 0.469f, 0.469f, 1.000f);
@@ -141,9 +141,9 @@ void style::setup_imgui() noexcept
     colors[ImGuiCol_ResizeGripActive] = color::interface::background_light;
     colors[ImGuiCol_Tab] = color::interface::background;
     colors[ImGuiCol_TabHovered] = color::interface::panel_hover;
-    colors[ImGuiCol_TabActive] = color::interface::panel_active;
-    colors[ImGuiCol_TabUnfocused] = color::interface::background;
-    colors[ImGuiCol_TabUnfocusedActive] = color::interface::panel_active;
+    colors[ImGuiCol_TabSelected] = color::interface::panel_active;
+    colors[ImGuiCol_TabDimmed] = color::interface::background;
+    colors[ImGuiCol_TabDimmedSelected] = color::interface::panel_active;
     colors[ImGuiCol_DockingPreview] = color::interface::panel_active;
     //colors[ImGuiCol_DockingEmptyBg] = TODO;
     colors[ImGuiCol_PlotLines] = color::interface::panel_active;
