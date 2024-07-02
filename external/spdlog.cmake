@@ -39,7 +39,7 @@ add_subdirectory(
   EXCLUDE_FROM_ALL
   SYSTEM
 )
-if(NOT TARGET spdlog)
+if(NOT TARGET spdlog::spdlog)
     message(FATAL_ERROR "spdlog target is missing")
 endif()
 

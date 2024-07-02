@@ -37,8 +37,8 @@ add_subdirectory(
   EXCLUDE_FROM_ALL
   SYSTEM
 )
-if(NOT TARGET nlohmann_json)
-    message(FATAL_ERROR "nlohmann_json target is missing")
+if(NOT TARGET nlohmann_json::nlohmann_json)
+    message(FATAL_ERROR "nlohmann_json::nlohmann_json target is missing")
 endif()
 
 # Disable warnings on headers

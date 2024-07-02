@@ -38,8 +38,8 @@ add_subdirectory(
   EXCLUDE_FROM_ALL
   SYSTEM
 )
-if(NOT TARGET scope_guard)
-    message(FATAL_ERROR "scope_guard target is missing")
+if(NOT TARGET scope_guard::scope_guard)
+    message(FATAL_ERROR "scope_guard::scope_guard target is missing")
 endif()
 
 list(POP_BACK CMAKE_MESSAGE_INDENT)

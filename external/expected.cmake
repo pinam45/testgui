@@ -37,8 +37,8 @@ add_subdirectory(
   EXCLUDE_FROM_ALL
   SYSTEM
 )
-if(NOT TARGET expected)
-    message(FATAL_ERROR "expected target is missing")
+if(NOT TARGET tl::expected)
+    message(FATAL_ERROR "tl::expected target is missing")
 endif()
 
 list(POP_BACK CMAKE_MESSAGE_INDENT)
