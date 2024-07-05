@@ -21,7 +21,7 @@ struct Window
     static constexpr int DEFAULT_HEIGHT = 450;
 
     template<typename... Args>
-    explicit Window(std::string name, Args... args);
+    explicit Window(std::string name, Args&&... args);
 
     void show(bool& open);
     void show();
@@ -33,7 +33,7 @@ struct Window
 
 template<typename Content, int ImGuiWindowFlags>
 template<typename... Args>
-Window<Content, ImGuiWindowFlags>::Window(std::string name_, Args... args)
+Window<Content, ImGuiWindowFlags>::Window(std::string name_, Args&&... args)
     : name(std::move(name_))
     , content(std::forward<Args>(args)...)
 {
