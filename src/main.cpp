@@ -32,19 +32,22 @@
 #include <view/utils/Window.hpp>
 
 // external
-#include <spdlog/spdlog.h>
-#include <nlohmann/json.hpp>
 #include <IconsFontAwesome6.h>
+#include <ImGuiNotify.hpp>
 #include <TextEditor.h>
 #include <backends/imgui_impl_glfw.h>
 #include <backends/imgui_impl_opengl3.h>
 #include <imgui.h>
 #include <imgui_internal.h>
 #include <impop_datepicker.h>
+#include <nlohmann/json.hpp>
+#include <spdlog/spdlog.h>
 //#include <impop_footer.h>
 #include <scope_guard.hpp>
+#include <tl/expected.hpp>
 
 // C++ standard
+#include <chrono>
 #include <iostream>
 #include <optional>
 
@@ -350,11 +353,12 @@ int main()
             if(ImGui::Button(ICON_FA_WAND_MAGIC_SPARKLES " do something"))
             {
                 test_future = tp.submit([]() -> std::string {
+                    std::this_thread::sleep_for(std::chrono::seconds(1));
                     return "test";
                 });
             }
             if(test_future.valid() && test_future.wait_for(std::chrono::seconds(0)) ==
-                                                    std::future_status::ready)
+                                        std::future_status::ready)
             {
                 test = test_future.get();
                 test_future = {};
@@ -363,6 +367,45 @@ int main()
             if(test)
             {
                 ImGui::Text("test:\n%s", test->data());
+            }
+
+            ImGui::SeparatorText("NOTIFICATIONS");
+            if(ImGui::Button("Success"))
+            {
+                ImGui::InsertNotification({ImGuiToastType::Success, 3000, "That is a success! %s", "(Format here)"});
+            }
+            ImGui::SameLine();
+            if(ImGui::Button("Warning"))
+            {
+                ImGui::InsertNotification({ImGuiToastType::Warning, 3000, "Hello World! This is a warning! %d", 0x1337});
+            }
+            ImGui::SameLine();
+            if(ImGui::Button("Error"))
+            {
+                ImGui::InsertNotification({ImGuiToastType::Error, 3000, "Hello World! This is an error! 0x%X", 0xDEADBEEF});
+            }
+            ImGui::SameLine();
+            if(ImGui::Button("Info"))
+            {
+                ImGui::InsertNotification({ImGuiToastType::Info, 3000, "Hello World! This is an info!"});
+            }
+            ImGui::SameLine();
+            if(ImGui::Button("Long info"))
+            {
+                ImGui::InsertNotification({ImGuiToastType::Info, 3000, "Hi, I'm a long notification. I'm here to show you that you can write a lot of text in me. I'm also here to show you that I can wrap text, so you don't have to worry about that."});
+            }
+            ImGui::SameLine();
+            if(ImGui::Button("Error with button"))
+            {
+                ImGui::InsertNotification({ImGuiToastType::Error, 3000, "Click me!", []() { ImGui::InsertNotification({ImGuiToastType::Success, 3000, "Thanks for clicking!"}); }, "Notification content"});
+            }
+            ImGui::SameLine();
+            if(ImGui::Button("Custom title"))
+            {
+                ImGuiToast toast(ImGuiToastType::Success, 3000);// <-- content can also be passed here as above
+                toast.setTitle("This is a %s title %d", "wonderful", 3);
+                toast.setContent("Lorem ipsum dolor sit amet");
+                ImGui::InsertNotification(toast);
             }
 
             font::push(font::embedded::DROID_SANS_MONO, font::LARGE_FONT_SIZE);
@@ -440,6 +483,7 @@ int main()
         //ImPop::PerfFooter();
 
         // Rendering
+        ImGui::RenderNotifications();
         ImGui::Render();
         int display_w, display_h;
         glfwGetFramebufferSize(main_window_handle->glf_window, &display_w, &display_h);
@@ -459,5 +503,8 @@ int main()
                         {"list", {1, 0, 2}},
                         {"object", {{"currency", "USD"}, {"value", 42.99}}}};
     SPDLOG_INFO("test, {}", a.dump(4));
+
+    tl::expected<void, std::string> b;
+
     return 0;
 }

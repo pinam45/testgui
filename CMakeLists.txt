@@ -68,6 +68,7 @@ include(implot)
 include(impop)
 include(imspinner)
 include(ImGuiColorTextEdit)
+include(ImGuiNotify)
 include(nlohmann_json)
 include(spdlog)
 include(utfcpp)
@@ -108,6 +109,7 @@ target_link_libraries(
   impop::impop
   imspinner::imspinner
   ImGuiColorTextEdit::ImGuiColorTextEdit
+  ImGuiNotify::ImGuiNotify
   nlohmann_json::nlohmann_json
   spdlog::spdlog
   utf8::cpp
