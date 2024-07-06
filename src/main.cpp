@@ -13,9 +13,9 @@
 #endif
 
 // project
-#include <tmpicons.hpp>
 #include <utils/log.hpp>
 #include <utils/thread_pool.hpp>
+#include <view/components/IconsFinder.hpp>
 #include <view/components/ImSpinnerDemo.hpp>
 #include <view/components/InterfaceStyleEditor.hpp>
 #include <view/components/LogViewer.hpp>
@@ -144,7 +144,11 @@ int main()
     });
     SCOPE_EXIT { con.disconnect(); };
 
+    // ImSpinner Demo
     Window<ImSpinnerDemo> imspinner_demo("ImSpinner Demo");
+
+    // Icons finder
+    Window<IconsFinder> icons_finder("Icons finder");
 
     // background tasks
     thread_pool tp(8);
@@ -288,6 +292,7 @@ int main()
                 ImGui::DockBuilderDockWindow("ImSpinner Demo", dock_main_id);
                 ImGui::DockBuilderDockWindow("Text editor style", dock_id_right);
                 ImGui::DockBuilderDockWindow("Interface style", dock_id_right);
+                ImGui::DockBuilderDockWindow("Icons finder", dock_id_right);
                 ImGui::DockBuilderDockWindow("Test", dock_id_right);
                 ImGui::DockBuilderDockWindow("Logs", dock_id_bottom);
                 ImGui::DockBuilderFinish(dockspace_id);
@@ -338,6 +343,12 @@ int main()
         if(interface_style_editor.open)
         {
             interface_style_editor.show();
+        }
+
+        // Icons finder
+        if(icons_finder.open)
+        {
+            icons_finder.show();
         }
 
         // Test window
@@ -411,7 +422,6 @@ int main()
             font::push(font::embedded::DROID_SANS_MONO, font::LARGE_FONT_SIZE);
             ImGui::SeparatorText("DROID_SANS_MONO " ICON_FA_ADDRESS_CARD);
             ImGui::BulletText("The quick brown fox jumps over the lazy dog");
-            printicons();
             font::pop();
 
             // font::push(font::embedded::INTEL_ONE_MONO, font::LARGE_FONT_SIZE);

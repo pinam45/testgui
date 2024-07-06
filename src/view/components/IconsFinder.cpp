@@ -7,7 +7,11 @@
 //
 
 // header
-#include "tmpicons.hpp"
+#include "IconsFinder.hpp"
+
+// project
+#include <utils/log.hpp>
+#include <view/font.hpp>
 
 // external
 #include <IconsFontAwesome6.h>
@@ -19,7 +23,7 @@
 
 namespace
 {
-    static constexpr std::array<std::pair<std::string_view, std::string_view>, 1390> icons{
+    constexpr std::array<std::pair<std::string_view, std::string_view>, 1390> icons{
       {
         {ICON_FA_0, "ICON_FA_0"},
         {ICON_FA_1, "ICON_FA_1"},
@@ -1414,18 +1418,40 @@ namespace
       }};
 }
 
-void printicons() noexcept
+IconsFinder::IconsFinder() noexcept
+    : _logger(logging::get_logger("IconsFinder"))
 {
-    float window_visible_x = ImGui::GetWindowPos().x + ImGui::GetWindowContentRegionMax().x;
-    for(const auto& icon : icons)
+}
+
+void IconsFinder::print() noexcept
+{
+    ImGuiStyle& style = ImGui::GetStyle();
+    const float window_visible_x = ImGui::GetWindowPos().x + ImGui::GetWindowContentRegionMax().x;
+
+    filter.Draw();
+    font::push(font::LARGE_FONT_SIZE);
+    for(size_t i = 0; i < icons.size(); ++i)
     {
-        ImGui::Text("%s", icon.first.data());
-        ImGui::SetItemTooltip(icon.second.data());
-        float last_txt = ImGui::GetItemRectMax().x;
-        if(last_txt + ImGui::GetFontSize() * 2 < window_visible_x)
+        const auto& icon = icons[i];
+        if(filter.PassFilter(icon.second.data()))
         {
-            ImGui::SameLine();
+            ImGui::Text("%s", icon.first.data());
+            ImGui::SetItemTooltip("%s", icon.second.data());
+            if(ImGui::IsItemClicked())
+            {
+                ImGui::SetClipboardText(icon.second.data());
+            }
+
+            if(i + 1 < icons.size())
+            {
+                float last_icon_x = ImGui::GetItemRectMax().x;
+                float next_icon_x = last_icon_x + style.ItemSpacing.x + ImGui::CalcTextSize(icons[i].first.data()).x;
+                if(next_icon_x < window_visible_x)
+                {
+                    ImGui::SameLine();
+                }
+            }
         }
     }
-    ImGui::Text("");
+    font::pop();
 }
