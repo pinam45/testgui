@@ -23,7 +23,7 @@ FetchContent_Populate(
   BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/fmt-build"
   SUBBUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/fmt-subbuild"
   GIT_REPOSITORY "https://github.com/fmtlib/fmt"
-  GIT_TAG "9.1.0"
+  GIT_TAG "11.0.1"
   GIT_SHALLOW ON
   GIT_PROGRESS ON
 )

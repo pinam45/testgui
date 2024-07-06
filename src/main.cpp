@@ -6,11 +6,11 @@
 // https://opensource.org/licenses/MIT
 //
 
-// magic
-#if defined(_MSC_VER) || defined(__MINGW32__) || defined(__MINGW64__)
-#   define localtime_r(timer,buf) (localtime_s(buf,timer) ? NULL : buf)
-#   define gmtime_r(timer,buf) (gmtime_s(buf,timer) ? NULL : buf)
-#endif
+//// magic
+//#if defined(_MSC_VER) || defined(__MINGW32__) || defined(__MINGW64__)
+//#define localtime_r(timer, buf) (localtime_s(buf, timer) ? NULL : buf)
+//#define gmtime_r(timer, buf) (gmtime_s(buf, timer) ? NULL : buf)
+//#endif
 
 // project
 #include <utils/log.hpp>
@@ -39,10 +39,11 @@
 #include <backends/imgui_impl_opengl3.h>
 #include <imgui.h>
 #include <imgui_internal.h>
-#include <impop_datepicker.h>
+//#include <impop_datepicker.h>
 #include <nlohmann/json.hpp>
 #include <spdlog/spdlog.h>
 //#include <impop_footer.h>
+#include <implot.h>
 #include <scope_guard.hpp>
 #include <tl/expected.hpp>
 
@@ -123,10 +124,10 @@ int main()
     bool show_implot_demo_window = true;
     bool show_another_window = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-    ImPlotTime t;
-    ImPlotTime default_time = ImPlot::MakeTime(2024, 1, 1);
-    ImPlotTime min_time = ImPlot::MakeTime(2023, 1, 1);
-    ImPlotTime max_time = ImPop::LocTimeNow();
+    //    ImPlotTime t;
+    //    ImPlotTime default_time = ImPlot::MakeTime(2024, 1, 1);
+    //    ImPlotTime min_time = ImPlot::MakeTime(2023, 1, 1);
+    //    ImPlotTime max_time = ImPop::LocTimeNow();
 
     // Log viewer
     Window<LogViewer> log_viewer("Logs");
@@ -356,10 +357,10 @@ int main()
             font::push(font::LARGE_FONT_SIZE);
             ImGui::Begin("Test");
 
-            if(ImPop::DatePicker("date", &t, &default_time, &min_time, &max_time))
-            {
-                // `t` has been updated
-            }
+            //if(ImPop::DatePicker("date", &t, &default_time, &min_time, &max_time))
+            //{
+            //    // `t` has been updated
+            //}
 
             if(ImGui::Button(ICON_FA_WAND_MAGIC_SPARKLES " do something"))
             {
