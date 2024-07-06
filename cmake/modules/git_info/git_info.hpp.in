@@ -1,0 +1,17 @@
+//
+// Copyright (c) 2024 Maxime Pinard
+//
+// Distributed under the MIT license
+// See accompanying file LICENSE or copy at
+// https://opensource.org/licenses/MIT
+//
+#include <string_view>
+
+namespace git_info
+{
+    constexpr bool retrieved_state = @GIT_RETRIEVED_STATE@;
+    constexpr std::string_view head_branch = "@GIT_HEAD_BRANCH@";
+    constexpr std::string_view head_sha1 = "@GIT_HEAD_SHA1@";
+    constexpr std::string_view head_sha1_short = "@GIT_HEAD_SHA1_SHORT@";
+    constexpr bool is_dirty = @GIT_IS_DIRTY@;
+}

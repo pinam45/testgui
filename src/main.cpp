@@ -13,6 +13,7 @@
 //#endif
 
 // project
+#include <git_info.hpp>
 #include <utils/log.hpp>
 #include <utils/thread_pool.hpp>
 #include <view/components/IconsFinder.hpp>
@@ -270,6 +271,28 @@ int main()
                     ImGui::EndMenu();
                 }
                 ImGui::EndMenuBar();
+            }
+
+            if(ImGui::BeginViewportSideBar("##BottomStatusBar", viewport, ImGuiDir_Down, ImGui::GetFrameHeight(), ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_MenuBar))
+            {
+                if(ImGui::BeginMenuBar())
+                {
+                    ImGui::Text("%s", git_info::head_branch.data());
+                    ImGui::Text("|");
+                    ImGui::Text("%s", git_info::head_sha1_short.data());
+                    ImGui::SetItemTooltip("%s", git_info::head_sha1.data());
+                    if(ImGui::IsItemClicked())
+                    {
+                        ImGui::SetClipboardText(git_info::head_sha1.data());
+                    }
+                    if constexpr(git_info::is_dirty)
+                    {
+                        ImGui::Text("|");
+                        ImGui::Text("dirty");
+                    }
+                    ImGui::EndMenuBar();
+                }
+                ImGui::End();
             }
 
             // Setup dockspace

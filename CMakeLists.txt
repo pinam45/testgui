@@ -30,6 +30,7 @@ list(APPEND
 
 # Flags module
 include(flags)
+include(git_info)
 
 # setup sanitize build types
 string(TOUPPER ${CMAKE_BUILD_TYPE} build_type)
@@ -118,6 +119,7 @@ target_link_libraries(
   fonts::fonts
   tl::expected
   sago::platform_folders
+  git_info
 )
 
 # Set log level
