@@ -35,7 +35,7 @@ if(NOT GIT_FOUND)
     set(GIT_HEAD_SHA1 "unknown")
     set(GIT_HEAD_SHA1_SHORT "unknown")
     set(GIT_IS_DIRTY "true")
-    configure_file("${PRE_CPP}" "${POST_CPP}" @ONLY)
+    configure_file("${pre_hpp}" "${post_hpp}" @ONLY)
 else()
     message(STATUS "git found: ${GIT_EXECUTABLE}")
 
