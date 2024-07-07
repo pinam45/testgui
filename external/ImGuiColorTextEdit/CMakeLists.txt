@@ -19,8 +19,8 @@ FetchContent_Populate(
   GIT_TAG "fb08648c87f5c872c268e11708ee518d60ed3e8e"
   #GIT_SHALLOW ON
   GIT_PROGRESS ON
-  PATCH_COMMAND git apply --whitespace=fix "${CMAKE_CURRENT_SOURCE_DIR}/fix.patch" || git status #FIXME
-  # https://gitlab.kitware.com/cmake/cmake/-/issues/21146
+  PATCH_COMMAND git apply --whitespace=fix "${CMAKE_CURRENT_SOURCE_DIR}/fix.patch"
+  UPDATE_DISCONNECTED ON
 )
 
 # Declare ImGuiColorTextEdit

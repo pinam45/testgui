@@ -26,8 +26,8 @@ FetchContent_Populate(
   GIT_TAG "3a33275633ce4be433332dc776e6a5b3bdea6506"
   #GIT_SHALLOW ON
   GIT_PROGRESS ON
-  PATCH_COMMAND git apply --whitespace=fix "${CMAKE_CURRENT_SOURCE_DIR}/external/gl3w/fix.patch" || git status #FIXME
-  # https://gitlab.kitware.com/cmake/cmake/-/issues/21146
+  PATCH_COMMAND git apply --whitespace=fix "${CMAKE_CURRENT_SOURCE_DIR}/external/gl3w/fix.patch"
+  UPDATE_DISCONNECTED ON
 )
 
 # Import

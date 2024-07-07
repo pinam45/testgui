@@ -19,6 +19,7 @@ FetchContent_Populate(
   GIT_TAG "f156599faefe316f7dd20fe6c783bf87c8bb6fd9"
   #GIT_SHALLOW ON
   GIT_PROGRESS ON
+  UPDATE_DISCONNECTED ON
 )
 
 # Declare implot

@@ -26,6 +26,7 @@ FetchContent_Populate(
   GIT_TAG "3.3.8"
   GIT_SHALLOW ON
   GIT_PROGRESS ON
+  UPDATE_DISCONNECTED ON
 )
 
 # requirements:

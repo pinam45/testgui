@@ -19,6 +19,7 @@ FetchContent_Populate(
   GIT_TAG "aee35595d9b91a47ca4e02427641b50f307b47bf"
   #GIT_SHALLOW ON
   GIT_PROGRESS ON
+  UPDATE_DISCONNECTED ON
 )
 
 # Move header to dedicated folder

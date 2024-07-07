@@ -26,6 +26,7 @@ FetchContent_Populate(
   GIT_TAG "4bdddca967fb01311076c67ad8dce9a6d6ef7730"
   #GIT_SHALLOW ON
   GIT_PROGRESS ON
+  UPDATE_DISCONNECTED ON
 )
 
 # Import

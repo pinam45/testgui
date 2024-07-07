@@ -19,6 +19,7 @@ FetchContent_Populate(
   GIT_TAG "a09c12f43ed6484430f166d197ea34406fe1b72c"
   #GIT_SHALLOW ON
   GIT_PROGRESS ON
+  UPDATE_DISCONNECTED ON
 )
 
 # Declare impop

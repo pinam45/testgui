@@ -19,6 +19,7 @@ FetchContent_Populate(
   GIT_TAG "v1.90.9-docking"
   GIT_SHALLOW ON
   GIT_PROGRESS ON
+  UPDATE_DISCONNECTED ON
 )
 
 # Declare imgui

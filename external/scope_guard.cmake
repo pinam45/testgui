@@ -26,6 +26,7 @@ FetchContent_Populate(
   GIT_TAG "v0.9.1"
   GIT_SHALLOW ON
   GIT_PROGRESS ON
+  UPDATE_DISCONNECTED ON
 )
 
 # Import
