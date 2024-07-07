@@ -16,6 +16,7 @@
 #include <git_info.hpp>
 #include <utils/log.hpp>
 #include <utils/thread_pool.hpp>
+#include <version_info.hpp>
 #include <view/components/IconsFinder.hpp>
 #include <view/components/ImSpinnerDemo.hpp>
 #include <view/components/InterfaceStyleEditor.hpp>
@@ -277,6 +278,8 @@ int main()
             {
                 if(ImGui::BeginMenuBar())
                 {
+                    ImGui::Text("%s", version_info::full_v.data());
+                    ImGui::Text("|");
                     ImGui::Text("%s", git_info::head_branch.data());
                     ImGui::Text("|");
                     ImGui::Text("%s", git_info::head_sha1_short.data());

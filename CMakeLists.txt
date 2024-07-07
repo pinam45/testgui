@@ -31,6 +31,7 @@ list(APPEND
 # Flags module
 include(flags)
 include(git_info)
+include(version_info)
 
 # setup sanitize build types
 get_property(is_multi_config GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
@@ -144,6 +145,7 @@ target_link_libraries(
   tl::expected
   sago::platform_folders
   git_info
+  version_info
 )
 
 # Set log level
