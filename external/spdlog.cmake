@@ -40,9 +40,10 @@ add_subdirectory(
   EXCLUDE_FROM_ALL
   SYSTEM
 )
-if(NOT TARGET spdlog::spdlog)
+if(NOT TARGET spdlog OR NOT TARGET spdlog::spdlog)
     message(FATAL_ERROR "spdlog target is missing")
 endif()
+set_target_properties(spdlog PROPERTIES FOLDER external)
 
 list(POP_BACK CMAKE_MESSAGE_INDENT)
 message(CHECK_PASS "done")

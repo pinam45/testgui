@@ -39,9 +39,10 @@ add_subdirectory(
   EXCLUDE_FROM_ALL
   SYSTEM
 )
-if(NOT TARGET sago::platform_folders)
+if(NOT TARGET platform_folders OR NOT TARGET sago::platform_folders)
     message(FATAL_ERROR "sago::platform_folders target is missing")
 endif()
+set_target_properties(platform_folders PROPERTIES FOLDER external)
 
 list(POP_BACK CMAKE_MESSAGE_INDENT)
 message(CHECK_PASS "done")

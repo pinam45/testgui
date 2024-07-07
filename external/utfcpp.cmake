@@ -36,9 +36,10 @@ add_subdirectory(
   EXCLUDE_FROM_ALL
   SYSTEM
 )
-if(NOT TARGET utf8::cpp)
+if(NOT TARGET utf8cpp OR NOT TARGET utf8::cpp)
     message(FATAL_ERROR "utf8::cpp target is missing")
 endif()
+set_target_properties(utf8cpp PROPERTIES FOLDER external)
 
 list(POP_BACK CMAKE_MESSAGE_INDENT)
 message(CHECK_PASS "done")

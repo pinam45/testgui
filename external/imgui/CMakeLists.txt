@@ -65,3 +65,4 @@ target_compile_definitions(
 
 # Configure
 target_compile_features(imgui PRIVATE cxx_std_98)
+set_target_properties(imgui PROPERTIES FOLDER external)

@@ -78,6 +78,10 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # Export compile commands for external tools
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# IDE folders config
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+set_property(GLOBAL PROPERTY PREDEFINED_TARGETS_FOLDER "_CMake")
+
 # Dependencies
 include(fmt)
 include(glfw)
@@ -110,6 +114,7 @@ target_sources(
   testgui PRIVATE
   ${sources} ${includes}
 )
+source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" FILES ${sources} ${includes})
 
 # Add includes
 target_include_directories(
@@ -152,3 +157,10 @@ target_compile_features(testgui PRIVATE cxx_std_17)
 
 # Add warning flags
 target_add_cxx_warning_flags(testgui)
+
+# Visual studio config
+set_property(
+  DIRECTORY
+  ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY
+  VS_STARTUP_PROJECT testgui
+)

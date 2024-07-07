@@ -48,3 +48,4 @@ target_link_libraries(
 
 # Configure
 target_compile_features(ImGuiNotify INTERFACE cxx_std_17)
+set_target_properties(ImGuiNotify PROPERTIES FOLDER external)

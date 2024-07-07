@@ -36,9 +36,10 @@ add_subdirectory(
   EXCLUDE_FROM_ALL
   SYSTEM
 )
-if(NOT TARGET fmt::fmt)
+if(NOT TARGET fmt OR NOT TARGET fmt::fmt)
     message(FATAL_ERROR "fmt::fmt target is missing")
 endif()
+set_target_properties(fmt PROPERTIES FOLDER external)
 
 list(POP_BACK CMAKE_MESSAGE_INDENT)
 message(CHECK_PASS "done")

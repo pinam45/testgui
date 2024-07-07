@@ -38,9 +38,10 @@ add_subdirectory(
   EXCLUDE_FROM_ALL
   SYSTEM
 )
-if(NOT TARGET nlohmann_json::nlohmann_json)
+if(NOT TARGET nlohmann_json OR NOT TARGET nlohmann_json::nlohmann_json)
     message(FATAL_ERROR "nlohmann_json::nlohmann_json target is missing")
 endif()
+set_target_properties(nlohmann_json PROPERTIES FOLDER external)
 
 # Disable warnings on headers
 get_target_property(nlohmann_json_include_directories nlohmann_json INTERFACE_INCLUDE_DIRECTORIES)

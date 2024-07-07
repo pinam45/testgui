@@ -47,6 +47,7 @@ add_subdirectory(
 if(NOT TARGET glfw)
     message(FATAL_ERROR "glfw target is missing")
 endif()
+set_target_properties(glfw PROPERTIES FOLDER external)
 add_library(glfw::glfw ALIAS glfw)
 
 list(POP_BACK CMAKE_MESSAGE_INDENT)

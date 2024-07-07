@@ -43,6 +43,7 @@ add_subdirectory(
 if(NOT TARGET SpvGenTwoLib)
     message(FATAL_ERROR "SpvGenTwoLib target is missing")
 endif()
+set_target_properties(SpvGenTwoLib PROPERTIES FOLDER external)
 add_library(SpvGenTwo::SpvGenTwoLib ALIAS SpvGenTwoLib)
 
 list(POP_BACK CMAKE_MESSAGE_INDENT)

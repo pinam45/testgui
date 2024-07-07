@@ -41,6 +41,8 @@ add_subdirectory(
 if(NOT TARGET gl3w)
     message(FATAL_ERROR "gl3w target is missing")
 endif()
+set_target_properties(gl3w PROPERTIES FOLDER external)
+set_target_properties(gl3w_gen PROPERTIES FOLDER external)
 add_library(gl3w::gl3w ALIAS gl3w)
 
 # Fix for CMake pre 3.20 behaviour, see CMP0118

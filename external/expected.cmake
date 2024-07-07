@@ -38,9 +38,10 @@ add_subdirectory(
   EXCLUDE_FROM_ALL
   SYSTEM
 )
-if(NOT TARGET tl::expected)
+if(NOT TARGET expected OR NOT TARGET tl::expected)
     message(FATAL_ERROR "tl::expected target is missing")
 endif()
+set_target_properties(expected PROPERTIES FOLDER external)
 
 list(POP_BACK CMAKE_MESSAGE_INDENT)
 message(CHECK_PASS "done")

@@ -39,9 +39,10 @@ add_subdirectory(
   EXCLUDE_FROM_ALL
   SYSTEM
 )
-if(NOT TARGET Pal::Sigslot)
+if(NOT TARGET sigslot OR NOT TARGET Pal::Sigslot)
     message(FATAL_ERROR "Pal::Sigslot target is missing")
 endif()
+set_target_properties(sigslot PROPERTIES FOLDER external)
 
 list(POP_BACK CMAKE_MESSAGE_INDENT)
 message(CHECK_PASS "done")
