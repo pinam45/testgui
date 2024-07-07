@@ -24,7 +24,7 @@ FetchContent_Populate(
   SUBBUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/spvgentwo-subbuild"
   GIT_REPOSITORY "https://github.com/rAzoR8/SpvGenTwo"
   GIT_TAG "4bdddca967fb01311076c67ad8dce9a6d6ef7730"
-  GIT_SHALLOW ON
+  #GIT_SHALLOW ON
   GIT_PROGRESS ON
 )
 

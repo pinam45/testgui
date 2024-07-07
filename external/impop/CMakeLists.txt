@@ -17,7 +17,7 @@ FetchContent_Populate(
   SUBBUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/impop-subbuild"
   GIT_REPOSITORY "https://github.com/kfish/impop"
   GIT_TAG "a09c12f43ed6484430f166d197ea34406fe1b72c"
-  GIT_SHALLOW ON
+  #GIT_SHALLOW ON
   GIT_PROGRESS ON
 )
 

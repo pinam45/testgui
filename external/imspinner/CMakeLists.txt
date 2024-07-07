@@ -17,7 +17,7 @@ FetchContent_Populate(
   SUBBUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/imspinner-subbuild"
   GIT_REPOSITORY "https://github.com/dalerank/imspinner"
   GIT_TAG "ff2eb8c3230debc878db689c9113498a7de97804"
-  GIT_SHALLOW ON
+  #GIT_SHALLOW ON
   GIT_PROGRESS ON
 )
 

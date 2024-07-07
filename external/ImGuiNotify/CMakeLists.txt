@@ -17,7 +17,7 @@ FetchContent_Populate(
   SUBBUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/imguinotify-subbuild"
   GIT_REPOSITORY "https://github.com/TyomaVader/ImGuiNotify"
   GIT_TAG "aee35595d9b91a47ca4e02427641b50f307b47bf"
-  GIT_SHALLOW ON
+  #GIT_SHALLOW ON
   GIT_PROGRESS ON
 )
 
