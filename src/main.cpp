@@ -175,7 +175,9 @@ int main()
             // Open "full-windowed" imgui window
             ImGuiViewport* viewport = ImGui::GetMainViewport();
             ImGui::SetNextWindowPos(viewport->Pos);
-            ImGui::SetNextWindowSize(viewport->Size);
+            ImVec2 size = viewport->Size;
+            size.y -= (ImGui::GetFrameHeight() - 1.f);// place for bottom bar
+            ImGui::SetNextWindowSize(size);
             ImGui::SetNextWindowViewport(viewport->ID);
             ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
             ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
@@ -275,6 +277,7 @@ int main()
                 ImGui::EndMenuBar();
             }
 
+            // bottom bar
             if(ImGui::BeginViewportSideBar("##BottomStatusBar", viewport, ImGuiDir_Down, ImGui::GetFrameHeight(), ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_MenuBar))
             {
                 if(ImGui::BeginMenuBar())
