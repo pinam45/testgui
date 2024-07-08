@@ -47,6 +47,7 @@
 //#include <impop_footer.h>
 #include <implot.h>
 #include <scope_guard.hpp>
+#include <tao/pegtl.hpp>
 #include <tl/expected.hpp>
 
 // C++ standard
