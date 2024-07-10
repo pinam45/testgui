@@ -282,6 +282,27 @@ int main()
             {
                 if(ImGui::BeginMenuBar())
                 {
+                    ImGui::Text("%.3f ms/frame (%.0f FPS)", 1000. / static_cast<double>(ImGui::GetIO().Framerate), ImGui::GetIO().Framerate);
+
+                    float right_content_size_x = 0;
+                    right_content_size_x += ImGui::CalcTextSize(version_info::full_v.data()).x;
+                    right_content_size_x += ImGui::GetCurrentContext()->Style.ItemSpacing.x;
+                    right_content_size_x += ImGui::CalcTextSize("|").x;
+                    right_content_size_x += ImGui::GetCurrentContext()->Style.ItemSpacing.x;
+                    right_content_size_x += ImGui::CalcTextSize(git_info::head_branch.data()).x;
+                    right_content_size_x += ImGui::GetCurrentContext()->Style.ItemSpacing.x;
+                    right_content_size_x += ImGui::CalcTextSize("|").x;
+                    right_content_size_x += ImGui::GetCurrentContext()->Style.ItemSpacing.x;
+                    right_content_size_x += ImGui::CalcTextSize(git_info::head_sha1_short.data()).x;
+                    if constexpr(git_info::is_dirty)
+                    {
+                        right_content_size_x += ImGui::GetCurrentContext()->Style.ItemSpacing.x;
+                        right_content_size_x += ImGui::CalcTextSize("|").x;
+                        right_content_size_x += ImGui::GetCurrentContext()->Style.ItemSpacing.x;
+                        right_content_size_x += ImGui::CalcTextSize("dirty").x;
+                    }
+                    ImGui::SetCursorPosX(ImGui::GetCursorPos().x + ImGui::GetContentRegionAvail().x - right_content_size_x);
+
                     ImGui::Text("%s", version_info::full_v.data());
                     ImGui::Text("|");
                     ImGui::Text("%s", git_info::head_branch.data());
