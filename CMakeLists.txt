@@ -102,7 +102,7 @@ include(sigslots)
 include(fonts)
 include(expected)
 include(PlatformFolders)
-include(pegtl)
+include(PEGTL)
 
 # Declare target
 add_executable(testgui)
