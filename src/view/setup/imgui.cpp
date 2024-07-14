@@ -10,6 +10,7 @@
 #include "imgui.hpp"
 
 // project
+#include <utils/config.hpp>
 #include <view/style/colors.hpp>
 #include <view/style/imgui.hpp>
 
@@ -22,7 +23,8 @@
 namespace
 {
     std::weak_ptr<imgui_context> imgui_existing_context;
-}
+    std::string imgui_ini_filename;
+}// namespace
 
 imgui_handle_t setup::imgui(main_window_handle_t main_window_handle, gl3w_handle_t gl3w_handle) noexcept
 {
@@ -43,11 +45,13 @@ imgui_handle_t setup::imgui(main_window_handle_t main_window_handle, gl3w_handle
 
     // Setup ImGui
     ImGuiIO& io = ImGui::GetIO();
-    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;// Enable docking
-    io.ConfigDockingWithShift = true;                // hold shift to use docking
-    io.IniFilename = nullptr;                        // disable .ini saving
-    //io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-    //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+    io.ConfigDockingWithShift = true;                    // hold shift to use docking
+    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;    // enable docking
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;// enable Keyboard Controls
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad; // enable Gamepad Controls
+
+    imgui_ini_filename = config::imgui::get_ini_settings_path();
+    io.IniFilename = imgui_ini_filename.c_str();
 
     // Setup style
     style::setup_imgui();
