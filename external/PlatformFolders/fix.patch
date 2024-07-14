@@ -1,0 +1,49 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 5ae2017..72f33c8 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1,5 +1,5 @@
+ # For target_compile_features
+-cmake_minimum_required(VERSION 3.1.0 FATAL_ERROR)
++cmake_minimum_required(VERSION 3.25)
+ 
+ set(PLATFORMFOLDERS_MAIN_PROJECT OFF)
+ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+@@ -22,8 +22,6 @@ add_library(platform_folders ${PLATFORMFOLDERS_TYPE}
+ 	sago/platform_folders.cpp
+ )
+ 
+-set_target_properties(platform_folders PROPERTIES DEBUG_POSTFIX "${CMAKE_DEBUG_POSTFIX}")
+-
+ # Creates an alias so that people building in-tree (instead of using find_package)...
+ # can still link against the same target
+ add_library(sago::platform_folders ALIAS platform_folders)
+@@ -32,7 +30,7 @@ add_library(sago::platform_folders ALIAS platform_folders)
+ include(GNUInstallDirs)
+ # Where to search for the header while building
+ target_include_directories(platform_folders PUBLIC
+-	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/sago>
++	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+ 	# Controls where #include <sago/platform_folders.h> starts to look from
+ 	# So /usr/include/<sago/platform_folders.h>
+ 	# or C:\Program Files\platform_folders\include\<sago/platform_folders.h>
+@@ -44,18 +42,7 @@ set_target_properties(platform_folders PROPERTIES
+ 	PUBLIC_HEADER "sago/platform_folders.h"
+ )
+ 
+-# cxx_std_11 requires v3.8
+-if(CMAKE_VERSION VERSION_LESS "3.8.0")
+-	# Use old method of forcing C++11
+-	set(CMAKE_CXX_STANDARD 11)
+-	set(CMAKE_CXX_STANDARD_REQUIRED true)
+-else()
+-	# Require (minimum) C++11 when using header
+-	# PRIVATE means only at compile time
+-	target_compile_features(platform_folders PUBLIC cxx_std_11)
+-endif()
+-
+-# cxx_nullptr exists in v3.1
++target_compile_features(platform_folders PUBLIC cxx_std_11)
+ target_compile_features(platform_folders PRIVATE cxx_nullptr)
+ 
+ # Cmake's find_package search path is different based on the system
