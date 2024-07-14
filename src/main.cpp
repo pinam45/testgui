@@ -55,11 +55,6 @@
 #include <iostream>
 #include <optional>
 
-namespace
-{
-    std::shared_ptr<spdlog::logger> logger = nullptr;
-}
-
 int main()
 {
     std::ios_base::sync_with_stdio(false);
@@ -69,7 +64,7 @@ int main()
     {
         return EXIT_FAILURE;
     }
-    logger = logging::get_logger();
+    std::shared_ptr<spdlog::logger> logger = logging::get_logger();
 
     // Setup
     glfw_handle_t glfw_handle = setup::glfw();
