@@ -14,6 +14,7 @@
 
 // project
 #include <git_info.hpp>
+#include <utils/config.hpp>
 #include <utils/log.hpp>
 #include <utils/thread_pool.hpp>
 #include <version_info.hpp>
@@ -65,6 +66,19 @@ int main()
         return EXIT_FAILURE;
     }
     std::shared_ptr<spdlog::logger> logger = logging::get_logger();
+
+    const std::string settings_path = config::get_settings_path();
+    config::settings_t settings;
+    if(auto res = config::from_file(settings_path))
+    {
+        settings = *res;
+        SPDLOG_LOGGER_INFO(logger, "loaded settings from {}", settings_path);
+    }
+    else
+    {
+        SPDLOG_LOGGER_ERROR(logger, "failed to load settings from {}: {}", settings_path, res.error());
+        SPDLOG_LOGGER_INFO(logger, "using default settings");
+    }
 
     // Setup
     glfw_handle_t glfw_handle = setup::glfw();
@@ -550,6 +564,15 @@ int main()
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         glfwSwapBuffers(main_window_handle->glf_window);
+    }
+
+    if(auto res = config::write_to_file(settings, settings_path))
+    {
+        SPDLOG_LOGGER_INFO(logger, "saved settings to {}", settings_path);
+    }
+    else
+    {
+        SPDLOG_LOGGER_ERROR(logger, "failed to save settings to {}: {}", settings_path, res.error());
     }
 
     nlohmann::json a = {{"pi", 3.141},

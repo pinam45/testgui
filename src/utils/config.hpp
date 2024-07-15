@@ -23,12 +23,17 @@ namespace config
 
     struct settings
     {
+        struct exemple
+        {
+            bool value = false;
+        } exemple;
         //TODO
     };
     using settings_t = settings;
 
     [[nodiscard]] std::string get_settings_path() noexcept;
     [[nodiscard]] tl::expected<settings_t, std::string> from_file(std::string path = get_settings_path()) noexcept;
+    [[nodiscard]] tl::expected<void, std::string> write_to_file(settings_t settings, std::string path = get_settings_path()) noexcept;
 
     namespace imgui
     {
