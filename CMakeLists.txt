@@ -103,6 +103,7 @@ include(fonts)
 include(expected)
 include(PlatformFolders)
 include(PEGTL)
+include(tomlplusplus)
 
 # Declare target
 add_executable(testgui)
@@ -146,6 +147,7 @@ target_link_libraries(
   tl::expected
   sago::platform_folders
   taocpp::pegtl
+  tomlplusplus::tomlplusplus
   git_info
   version_info
 )
@@ -154,6 +156,8 @@ target_link_libraries(
 target_compile_definitions(
   testgui PRIVATE
   SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_TRACE
+  SPDLOG_NO_SOURCE_LOC
+  TOML_EXCEPTIONS=0
 )
 
 # Build in C++17
