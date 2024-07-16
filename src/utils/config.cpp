@@ -65,7 +65,7 @@ std::string config::get_settings_path() noexcept
     return path.generic_string();
 }
 
-tl::expected<config::settings_t, std::string> config::from_file(std::string path) noexcept
+tl::expected<config::settings_t, std::string> config::from_file(std::string_view path) noexcept
 {
     config::settings_t config;
 
@@ -85,7 +85,7 @@ tl::expected<config::settings_t, std::string> config::from_file(std::string path
     return config;
 }
 
-tl::expected<void, std::string> config::write_to_file(config::settings_t settings, std::string path) noexcept
+tl::expected<void, std::string> config::write_to_file(config::settings_t settings, std::string_view path) noexcept
 {
     toml::table table{
       {"exemple", toml::table{
@@ -94,14 +94,14 @@ tl::expected<void, std::string> config::write_to_file(config::settings_t setting
     std::error_code ignored;
     if(std::filesystem::exists(path, ignored))
     {
-        std::string path_old = path + ".old";
+        const std::string path_old = std::string(path) + ".old";
         if(std::filesystem::exists(path_old, ignored))
         {
             std::filesystem::remove(path_old, ignored);
         }
         std::filesystem::rename(path, path_old, ignored);
     }
-    if(auto file = std::ofstream(path))
+    if(auto file = std::ofstream(std::filesystem::path(path)))
     {
         file << table << std::endl;
     }
