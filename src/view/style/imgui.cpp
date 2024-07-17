@@ -161,4 +161,5 @@ void style::setup_imgui() noexcept
     //colors[ImGuiCol_NavWindowingHighlight] = TODO;
     //colors[ImGuiCol_NavWindowingDimBg] = TODO;
     colors[ImGuiCol_ModalWindowDimBg] = color::interface::background;
+    colors[ImGuiCol_ModalWindowDimBg].w = 0.586f;
 }

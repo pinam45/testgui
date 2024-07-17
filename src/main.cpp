@@ -179,6 +179,8 @@ int main()
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
+        const ImGuiID version_modal_id = ImHashStr("VERSION_MODAL");
+
         // Main window (background)
         {
             // Open "full-windowed" imgui window
@@ -279,7 +281,9 @@ int main()
                 {
                     if(ImGui::MenuItem(ICON_FA_INFO " Version", nullptr))
                     {
-                        SPDLOG_LOGGER_ERROR(logger, "TODO: version");
+                        ImGui::PushOverrideID(version_modal_id);
+                        ImGui::OpenPopup(ICON_FA_INFO " Version");
+                        ImGui::PopID();
                     }
                     ImGui::EndMenu();
                 }
@@ -363,6 +367,58 @@ int main()
 
             ImGui::End();
         }
+
+        // Version modal
+        ImGui::PushOverrideID(version_modal_id);
+        ImGui::SetNextWindowPos(ImGui::GetMainViewport()->GetCenter(), ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+        if(ImGui::BeginPopupModal(ICON_FA_INFO " Version", nullptr, ImGuiWindowFlags_AlwaysAutoResize))
+        {
+            if(ImGui::BeginTable("versiontable", 2, ImGuiTableFlags_RowBg | ImGuiTableFlags_Borders))
+            {
+                ImGui::TableNextRow();
+                ImGui::TableSetColumnIndex(0);
+                ImGui::Text("Version");
+                ImGui::TableSetColumnIndex(1);
+                ImGui::Text("%s", version_info::full_v.data());
+
+                ImGui::TableNextRow();
+                ImGui::TableSetColumnIndex(0);
+                ImGui::Text("Branch");
+                ImGui::TableSetColumnIndex(1);
+                ImGui::Text("%s", git_info::head_branch.data());
+
+                ImGui::TableNextRow();
+                ImGui::TableSetColumnIndex(0);
+                ImGui::Text("Commit");
+                ImGui::TableSetColumnIndex(1);
+                ImGui::Text("%s", git_info::head_sha1_short.data());
+                ImGui::SetItemTooltip("%s", git_info::head_sha1.data());
+
+                ImGui::TableNextRow();
+                ImGui::TableSetColumnIndex(0);
+                ImGui::Text("State");
+                ImGui::TableSetColumnIndex(1);
+                if constexpr(git_info::is_dirty)
+                {
+                    ImGui::Text("dirty");
+                }
+                else
+                {
+                    ImGui::Text("clean");
+                }
+
+                ImGui::EndTable();
+            }
+
+            ImGui::SetCursorPosX(ImGui::GetCursorPos().x + ImGui::GetContentRegionAvail().x - (ImGui::CalcTextSize("OK").x + 2 * ImGui::GetCurrentContext()->Style.FramePadding.x));
+            if(ImGui::Button("OK"))
+            {
+                ImGui::CloseCurrentPopup();
+            }
+            ImGui::SetItemDefaultFocus();
+            ImGui::EndPopup();
+        }
+        ImGui::PopID();
 
         // Imgui demo window
         if(show_imgui_demo_window)
