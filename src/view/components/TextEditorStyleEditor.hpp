@@ -26,9 +26,9 @@ public:
 
     explicit TextEditorStyleEditor(const TextEditor::Palette& text_editor_palette = style::color::text_editor::palette) noexcept;
 
-    TextEditorStyleEditor(const TextEditorStyleEditor&) = default;
+    TextEditorStyleEditor(const TextEditorStyleEditor&) = delete;
     TextEditorStyleEditor(TextEditorStyleEditor&&) noexcept = default;
-    TextEditorStyleEditor& operator=(const TextEditorStyleEditor&) = default;
+    TextEditorStyleEditor& operator=(const TextEditorStyleEditor&) = delete;
     TextEditorStyleEditor& operator=(TextEditorStyleEditor&&) noexcept = default;
 
     ~TextEditorStyleEditor() noexcept = default;

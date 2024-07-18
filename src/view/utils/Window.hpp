@@ -40,11 +40,11 @@ Window<Content, ImGuiWindowFlags>::Window(std::string name_, Args&&... args)
 }
 
 template<typename Content, int ImGuiWindowFlags>
-void Window<Content, ImGuiWindowFlags>::show(bool& open)
+void Window<Content, ImGuiWindowFlags>::show(bool& _open)
 {
     ImGui::SetNextWindowSize(ImVec2(DEFAULT_WIDTH, DEFAULT_HEIGHT), ImGuiCond_Once);
 
-    if(!ImGui::Begin(name.c_str(), &open, ImGuiWindowFlags))
+    if(!ImGui::Begin(name.c_str(), &_open, ImGuiWindowFlags))
     {
         ImGui::End();
         return;

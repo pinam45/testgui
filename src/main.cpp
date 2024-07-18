@@ -295,7 +295,7 @@ int main()
             {
                 if(ImGui::BeginMenuBar())
                 {
-                    ImGui::Text("%.3f ms/frame (%.0f FPS)", 1000. / static_cast<double>(ImGui::GetIO().Framerate), ImGui::GetIO().Framerate);
+                    ImGui::Text("%.3f ms/frame (%.0f FPS)", 1000. / static_cast<double>(ImGui::GetIO().Framerate), static_cast<double>(ImGui::GetIO().Framerate));
 
                     float right_content_size_x = 0;
                     right_content_size_x += ImGui::CalcTextSize(version_info::full_v.data()).x;
