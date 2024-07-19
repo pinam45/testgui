@@ -166,6 +166,9 @@ target_compile_features(testgui PRIVATE cxx_std_17)
 # Add warning flags
 target_add_cxx_warning_flags(testgui)
 
+# make GUI executable
+set_target_properties(testgui PROPERTIES WIN32_EXECUTABLE ON)
+
 # Visual studio config
 set_property(
   DIRECTORY
