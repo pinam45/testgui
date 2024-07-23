@@ -80,6 +80,18 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # https://cmake.org/cmake/help/latest/variable/CMAKE_MSVC_RUNTIME_LIBRARY.html
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<OR:$<CONFIG:Debug>,$<CONFIG:Asan>,$<CONFIG:UBSan>,$<CONFIG:Tsan>,$<CONFIG:Sanitize>>:Debug>")
 
+# Statically link libgcc and libstdc++ with MINGW gcc
+# https://gcc.gnu.org/onlinedocs/gcc/Link-Options.html
+if(MINGW AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    custom_check_cxx_compiler_flag("-static-libgcc" res1)
+    custom_check_cxx_compiler_flag("-static-libstdc++" res2)
+    if(res1 AND res2)
+        set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
+    else()
+        message(WARNING "-static-libgcc/-static-libstdc++ reported as unsupported by compiler")
+    endif()
+endif()
+
 # Export compile commands for external tools
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
