@@ -76,6 +76,10 @@ set(CMAKE_C_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# Statically link runtime library with MSVC
+# https://cmake.org/cmake/help/latest/variable/CMAKE_MSVC_RUNTIME_LIBRARY.html
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<OR:$<CONFIG:Debug>,$<CONFIG:Asan>,$<CONFIG:UBSan>,$<CONFIG:Tsan>,$<CONFIG:Sanitize>>:Debug>")
+
 # Export compile commands for external tools
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
