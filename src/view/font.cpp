@@ -35,9 +35,9 @@ namespace
         font::embedded font = font::DEFAULT_FONT;
         float size = font::DEFAULT_FONT_SIZE;
 
-        font_id(font::embedded font, float size) noexcept
-            : font(font)
-            , size(size)
+        font_id(font::embedded _font, float _size) noexcept
+            : font(_font)
+            , size(_size)
         {
         }
 

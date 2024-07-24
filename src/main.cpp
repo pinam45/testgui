@@ -56,7 +56,7 @@
 #include <iostream>
 #include <optional>
 
-int main(int argc, char* argv[])
+int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 {
     std::ios_base::sync_with_stdio(false);
     setlocale(LC_ALL, "C");
