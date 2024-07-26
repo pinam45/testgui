@@ -18,6 +18,83 @@ namespace style
 {
     namespace color
     {
+        // https://mui.com/material-ui/customization/palette/#values
+        namespace mui
+        {
+            namespace common
+            {
+                static constexpr ImVec4 black = ImVec4_from_bytes(0, 0, 0, 255);
+                static constexpr ImVec4 white = ImVec4_from_bytes(255, 255, 255, 255);
+
+            }// namespace common
+            namespace primary
+            {
+                static constexpr ImVec4 main = ImVec4_from_bytes(25, 118, 210, 255);
+                static constexpr ImVec4 light = ImVec4_from_bytes(66, 165, 245, 255);
+                static constexpr ImVec4 dark = ImVec4_from_bytes(21, 101, 192, 255);
+                static constexpr ImVec4 contrast_text = common::white;
+
+            }// namespace primary
+            namespace secondary
+            {
+                static constexpr ImVec4 main = ImVec4_from_bytes(156, 39, 176, 255);
+                static constexpr ImVec4 light = ImVec4_from_bytes(186, 104, 200, 255);
+                static constexpr ImVec4 dark = ImVec4_from_bytes(123, 31, 162, 255);
+                static constexpr ImVec4 contrast_text = common::white;
+
+            }// namespace secondary
+            namespace error
+            {
+                static constexpr ImVec4 main = ImVec4_from_bytes(211, 47, 47, 255);
+                static constexpr ImVec4 light = ImVec4_from_bytes(239, 83, 80, 255);
+                static constexpr ImVec4 dark = ImVec4_from_bytes(198, 40, 40, 255);
+                static constexpr ImVec4 contrast_text = common::white;
+
+            }// namespace error
+            namespace warning
+            {
+                static constexpr ImVec4 main = ImVec4_from_bytes(237, 108, 2, 255);
+                static constexpr ImVec4 light = ImVec4_from_bytes(255, 152, 0, 255);
+                static constexpr ImVec4 dark = ImVec4_from_bytes(230, 81, 0, 255);
+                static constexpr ImVec4 contrast_text = common::white;
+
+            }// namespace warning
+            namespace info
+            {
+                static constexpr ImVec4 main = ImVec4_from_bytes(2, 136, 209, 255);
+                static constexpr ImVec4 light = ImVec4_from_bytes(3, 169, 244, 255);
+                static constexpr ImVec4 dark = ImVec4_from_bytes(1, 87, 155, 255);
+                static constexpr ImVec4 contrast_text = common::white;
+
+            }// namespace info
+            namespace success
+            {
+                static constexpr ImVec4 main = ImVec4_from_bytes(46, 125, 50, 255);
+                static constexpr ImVec4 light = ImVec4_from_bytes(76, 175, 80, 255);
+                static constexpr ImVec4 dark = ImVec4_from_bytes(27, 94, 32, 255);
+                static constexpr ImVec4 contrast_text = common::white;
+            }// namespace success
+        }// namespace mui
+
+        // https://carbondesignsystem.com/data-visualization/color-palettes/#alert-palette
+        namespace cds
+        {
+            namespace light
+            {
+                static constexpr ImVec4 red = ImVec4_from_bytes(218, 30, 40, 255);
+                static constexpr ImVec4 orange = ImVec4_from_bytes(255, 131, 43, 255);
+                static constexpr ImVec4 yellow = ImVec4_from_bytes(241, 194, 27, 255);
+                static constexpr ImVec4 green = ImVec4_from_bytes(25, 128, 56, 255);
+            }// namespace light
+            namespace dark
+            {
+                static constexpr ImVec4 red = ImVec4_from_bytes(250, 77, 86, 255);
+                static constexpr ImVec4 orange = ImVec4_from_bytes(255, 131, 43, 255);
+                static constexpr ImVec4 yellow = ImVec4_from_bytes(241, 194, 27, 255);
+                static constexpr ImVec4 green = ImVec4_from_bytes(36, 161, 72, 255);
+            }// namespace dark
+        }// namespace alert
+
         namespace interface
         {
             static constexpr ImVec4 background = ImVec4_from_bytes(37, 37, 38);
