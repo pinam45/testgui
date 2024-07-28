@@ -156,7 +156,7 @@ target_link_libraries(
   ImGuiNotify::ImGuiNotify
   nlohmann_json::nlohmann_json
   spdlog::spdlog
-  utf8::cpp
+  utf8cpp::utf8cpp
   scope_guard::scope_guard
   Pal::Sigslot
   fonts::fonts

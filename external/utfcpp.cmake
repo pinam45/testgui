@@ -9,7 +9,7 @@
 # Fix for CMake pre 3.20 behaviour, see CMP0118
 set_source_files_properties(${global_generated_files_list} PROPERTIES GENERATED ON)
 
-if(TARGET utf8::cpp)
+if(TARGET utf8cpp::utf8cpp)
     return()
 endif()
 
@@ -23,7 +23,7 @@ FetchContent_Populate(
   BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/utfcpp-build"
   SUBBUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/utfcpp-subbuild"
   GIT_REPOSITORY "https://github.com/nemtrif/utfcpp"
-  GIT_TAG "v3.2.2"
+  GIT_TAG "v4.0.5"
   GIT_SHALLOW ON
   GIT_PROGRESS ON
   UPDATE_DISCONNECTED ON
@@ -36,10 +36,11 @@ add_subdirectory(
   EXCLUDE_FROM_ALL
   SYSTEM
 )
-if(NOT TARGET utf8cpp OR NOT TARGET utf8::cpp)
-    message(FATAL_ERROR "utf8::cpp target is missing")
+if(NOT TARGET utf8cpp)
+    message(FATAL_ERROR "utf8cpp target is missing")
 endif()
 set_target_properties(utf8cpp PROPERTIES FOLDER external)
+add_library(utf8cpp::utf8cpp ALIAS utf8cpp)
 
 list(POP_BACK CMAKE_MESSAGE_INDENT)
 message(CHECK_PASS "done")
