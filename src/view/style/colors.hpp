@@ -109,6 +109,30 @@ namespace style
             static constexpr ImVec4 text_disabled = ImVec4_from_bytes(151, 151, 151);
 
             static constexpr ImVec4 border = ImVec4_from_bytes(78, 78, 78);
+
+            static constexpr ImVec4 primary = mui::primary::dark;
+            static constexpr ImVec4 primary_hovered = mui::primary::main;
+            static constexpr ImVec4 primary_active = mui::primary::light;
+
+            static constexpr ImVec4 secondary = mui::secondary::dark;
+            static constexpr ImVec4 secondary_hovered = mui::secondary::main;
+            static constexpr ImVec4 secondary_active = mui::secondary::light;
+
+            static constexpr ImVec4 error = mui::error::dark;
+            static constexpr ImVec4 error_hovered = mui::error::main;
+            static constexpr ImVec4 error_active = mui::error::light;
+
+            static constexpr ImVec4 warning = mui::warning::dark;
+            static constexpr ImVec4 warning_hovered = mui::warning::main;
+            static constexpr ImVec4 warning_active = mui::warning::light;
+
+            static constexpr ImVec4 info = mui::info::dark;
+            static constexpr ImVec4 info_hovered = mui::info::main;
+            static constexpr ImVec4 info_active = mui::info::light;
+
+            static constexpr ImVec4 success = mui::success::dark;
+            static constexpr ImVec4 success_hovered = mui::success::main;
+            static constexpr ImVec4 success_active = mui::success::light;
         }// namespace interface
 
         namespace text_editor
