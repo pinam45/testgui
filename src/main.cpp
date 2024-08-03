@@ -498,36 +498,72 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
             }
 
             ImGui::SeparatorText("NOTIFICATIONS");
+            ImGui::PushStyleColor(ImGuiCol_Button, style::color::interface::success);
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, style::color::interface::success_hovered);
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, style::color::interface::success_active);
             if(ImGui::Button("Success"))
             {
                 ImGui::InsertNotification({ImGuiToastType::Success, 3000, "That is a success! %s", "(Format here)"});
             }
+            ImGui::PopStyleColor(3);
+
             ImGui::SameLine();
+
+            ImGui::PushStyleColor(ImGuiCol_Button, style::color::interface::warning);
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, style::color::interface::warning_hovered);
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, style::color::interface::warning_active);
             if(ImGui::Button("Warning"))
             {
                 ImGui::InsertNotification({ImGuiToastType::Warning, 3000, "Hello World! This is a warning! %d", 0x1337});
             }
+            ImGui::PopStyleColor(3);
+
             ImGui::SameLine();
+
+            ImGui::PushStyleColor(ImGuiCol_Button, style::color::interface::error);
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, style::color::interface::error_hovered);
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, style::color::interface::error_active);
             if(ImGui::Button("Error"))
             {
                 ImGui::InsertNotification({ImGuiToastType::Error, 3000, "Hello World! This is an error! 0x%X", 0xDEADBEEF});
             }
+            ImGui::PopStyleColor(3);
+
             ImGui::SameLine();
+
+            ImGui::PushStyleColor(ImGuiCol_Button, style::color::interface::info);
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, style::color::interface::info_hovered);
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, style::color::interface::info_active);
             if(ImGui::Button("Info"))
             {
                 ImGui::InsertNotification({ImGuiToastType::Info, 3000, "Hello World! This is an info!"});
             }
+            ImGui::PopStyleColor(3);
+
             ImGui::SameLine();
+
+            ImGui::PushStyleColor(ImGuiCol_Button, style::color::interface::primary);
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, style::color::interface::primary_hovered);
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, style::color::interface::primary_active);
             if(ImGui::Button("Long info"))
             {
                 ImGui::InsertNotification({ImGuiToastType::Info, 3000, "Hi, I'm a long notification. I'm here to show you that you can write a lot of text in me. I'm also here to show you that I can wrap text, so you don't have to worry about that."});
             }
+            ImGui::PopStyleColor(3);
+
             ImGui::SameLine();
+
+            ImGui::PushStyleColor(ImGuiCol_Button, style::color::interface::secondary);
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, style::color::interface::secondary_hovered);
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, style::color::interface::secondary_active);
             if(ImGui::Button("Error with button"))
             {
                 ImGui::InsertNotification({ImGuiToastType::Error, 3000, "Click me!", []() { ImGui::InsertNotification({ImGuiToastType::Success, 3000, "Thanks for clicking!"}); }, "Notification content"});
             }
+            ImGui::PopStyleColor(3);
+
             ImGui::SameLine();
+
             if(ImGui::Button("Custom title"))
             {
                 ImGuiToast toast(ImGuiToastType::Success, 3000);// <-- content can also be passed here as above
