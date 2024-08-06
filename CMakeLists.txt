@@ -191,3 +191,7 @@ set_property(
   ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY
   VS_STARTUP_PROJECT testgui
 )
+
+# Install
+include(GNUInstallDirs)
+install(TARGETS testgui)
