@@ -120,6 +120,7 @@ include(expected)
 include(PlatformFolders)
 include(PEGTL)
 include(tomlplusplus)
+include(curl)
 
 # Declare target
 add_executable(testgui)
@@ -164,6 +165,7 @@ target_link_libraries(
   sago::platform_folders
   taocpp::pegtl
   tomlplusplus::tomlplusplus
+  CURL::libcurl
   git_info
   version_info
 )
