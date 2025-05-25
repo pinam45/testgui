@@ -26,7 +26,7 @@ FetchContent_Populate(
   BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/spdlog-build"
   SUBBUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/spdlog-subbuild"
   GIT_REPOSITORY "https://github.com/gabime/spdlog"
-  GIT_TAG "v1.14.1"
+  GIT_TAG "v1.15.3"
   GIT_SHALLOW ON
   GIT_PROGRESS ON
   UPDATE_DISCONNECTED ON
