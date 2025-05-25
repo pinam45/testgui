@@ -75,18 +75,18 @@ namespace
         colors[ImGuiCol_NavWindowingDimBg] = ImVec4(0.000f, 0.000f, 0.000f, 0.586f);
         colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.000f, 0.000f, 0.000f, 0.586f);
 
-        style->ChildRounding = 0.f;//4.0f;
+        style->ChildRounding = 0.f; // 4.0f;
         style->FrameBorderSize = 1.0f;
-        style->FrameRounding = 0.f;//2.0f;
+        style->FrameRounding = 0.f; // 2.0f;
         style->GrabMinSize = 7.0f;
-        style->PopupRounding = 0.f;    //2.0f;
-        style->ScrollbarRounding = 0.f;//12.0f;
+        style->PopupRounding = 0.f; // 2.0f;
+        style->ScrollbarRounding = 0.f; // 12.0f;
         style->ScrollbarSize = 13.0f;
         style->TabBorderSize = 1.0f;
-        style->TabRounding = 0.f;   //0.0f;
-        style->WindowRounding = 0.f;//4.0f;
+        style->TabRounding = 0.f; // 0.0f;
+        style->WindowRounding = 0.f; // 4.0f;
     }
-}// namespace
+} // namespace
 
 void style::setup_imgui() noexcept
 {
@@ -145,21 +145,21 @@ void style::setup_imgui() noexcept
     colors[ImGuiCol_TabDimmed] = color::interface::background;
     colors[ImGuiCol_TabDimmedSelected] = color::interface::panel_active;
     colors[ImGuiCol_DockingPreview] = color::interface::panel_active;
-    //colors[ImGuiCol_DockingEmptyBg] = TODO;
+    // colors[ImGuiCol_DockingEmptyBg] = TODO;
     colors[ImGuiCol_PlotLines] = color::interface::panel_active;
     colors[ImGuiCol_PlotLinesHovered] = color::interface::panel_hover;
     colors[ImGuiCol_PlotHistogram] = color::interface::panel_active;
     colors[ImGuiCol_PlotHistogramHovered] = color::interface::panel_hover;
-    //colors[ImGuiCol_TableHeaderBg] = TODO;
-    //colors[ImGuiCol_TableBorderStrong] = TODO;
-    //colors[ImGuiCol_TableBorderLight] = TODO;
-    //colors[ImGuiCol_TableRowBg] = TODO;
-    //colors[ImGuiCol_TableRowBgAlt] = TODO;
+    // colors[ImGuiCol_TableHeaderBg] = TODO;
+    // colors[ImGuiCol_TableBorderStrong] = TODO;
+    // colors[ImGuiCol_TableBorderLight] = TODO;
+    // colors[ImGuiCol_TableRowBg] = TODO;
+    // colors[ImGuiCol_TableRowBgAlt] = TODO;
     colors[ImGuiCol_TextSelectedBg] = color::interface::panel_active;
     colors[ImGuiCol_DragDropTarget] = color::interface::background;
     colors[ImGuiCol_NavHighlight] = color::interface::background;
-    //colors[ImGuiCol_NavWindowingHighlight] = TODO;
-    //colors[ImGuiCol_NavWindowingDimBg] = TODO;
+    // colors[ImGuiCol_NavWindowingHighlight] = TODO;
+    // colors[ImGuiCol_NavWindowingDimBg] = TODO;
     colors[ImGuiCol_ModalWindowDimBg] = color::interface::background;
     colors[ImGuiCol_ModalWindowDimBg].w = 0.586f;
 }

@@ -36,7 +36,9 @@ public:
     template<typename Func, typename... Args>
     void exec(Func&& task, Args&&... args) noexcept;
 
-    template<typename Func, typename... Args, typename Res = std::invoke_result_t<std::decay_t<Func>, std::decay_t<Args>...>>
+    template<typename Func,
+             typename... Args,
+             typename Res = std::invoke_result_t<std::decay_t<Func>, std::decay_t<Args>...>>
     [[nodiscard]] std::future<Res> submit(Func&& task, Args&&... args) noexcept;
 
     void wait() noexcept;
@@ -63,7 +65,7 @@ inline thread_pool::thread_pool(size_t thread_number) noexcept
 {
     _running = true;
     _threads.resize(std::max(static_cast<size_t>(1ul), thread_number));
-    for(std::thread& thread : _threads)
+    for(std::thread& thread: _threads)
     {
         thread = std::thread(&thread_pool::worker, this);
     }
@@ -74,15 +76,13 @@ inline thread_pool::~thread_pool() noexcept
     // end all tasks
     {
         std::unique_lock<std::mutex> tasks_lock(_tasks_mutex);
-        _task_done.wait(tasks_lock, [this]() {
-            return (_tasks_count == 0);
-        });
+        _task_done.wait(tasks_lock, [this]() { return (_tasks_count == 0); });
     }
 
     // end threads
     _running = false;
     _task_available.notify_all();
-    for(std::thread& thread : _threads)
+    for(std::thread& thread: _threads)
     {
         thread.join();
     }
@@ -116,31 +116,33 @@ std::future<Res> thread_pool::submit(Func&& task, Args&&... args) noexcept
     std::function<Res()> task_function = std::bind(std::forward<Func>(task), std::forward<Args>(args)...);
     std::shared_ptr<std::promise<Res>> promise = std::make_shared<std::promise<Res>>();
     std::future<Res> future = promise->get_future();
-    exec([task_function = std::move(task_function), promise = std::move(promise)]() noexcept {
-        try
-        {
-            if constexpr(std::is_void_v<Res>)
-            {
-                std::invoke(task_function);
-                promise->set_value();
-            }
-            else
-            {
-                auto tmp = std::invoke(task_function);
-                promise->set_value(tmp);
-            }
-        }
-        catch(...)
-        {
-            try
-            {
-                promise->set_exception(std::current_exception());
-            }
-            catch(...)
-            {
-            }
-        }
-    });
+    exec(
+      [task_function = std::move(task_function), promise = std::move(promise)]() noexcept
+      {
+          try
+          {
+              if constexpr(std::is_void_v<Res>)
+              {
+                  std::invoke(task_function);
+                  promise->set_value();
+              }
+              else
+              {
+                  auto tmp = std::invoke(task_function);
+                  promise->set_value(tmp);
+              }
+          }
+          catch(...)
+          {
+              try
+              {
+                  promise->set_exception(std::current_exception());
+              }
+              catch(...)
+              {
+              }
+          }
+      });
     return future;
 }
 
@@ -159,18 +161,14 @@ void thread_pool::exec(Func&& task, Args&&... args) noexcept
 inline void thread_pool::wait() noexcept
 {
     std::unique_lock<std::mutex> tasks_lock(_tasks_mutex);
-    _task_done.wait(tasks_lock, [this]() {
-        return (_tasks_count == 0);
-    });
+    _task_done.wait(tasks_lock, [this]() { return (_tasks_count == 0); });
 }
 
 template<typename R, typename P>
 bool thread_pool::wait_for(const std::chrono::duration<R, P>& duration) noexcept
 {
     std::unique_lock<std::mutex> tasks_lock(_tasks_mutex);
-    return _task_done.wait_for(tasks_lock, duration, [this]() {
-        return (_tasks_count == 0);
-    });
+    return _task_done.wait_for(tasks_lock, duration, [this]() { return (_tasks_count == 0); });
 }
 
 inline void thread_pool::worker() noexcept
@@ -179,9 +177,7 @@ inline void thread_pool::worker() noexcept
     {
         std::function<void()> task;
         std::unique_lock<std::mutex> tasks_lock(_tasks_mutex);
-        _task_available.wait(tasks_lock, [this]() {
-            return !_tasks.empty() || !_running;
-        });
+        _task_available.wait(tasks_lock, [this]() { return !_tasks.empty() || !_running; });
         if(_running)
         {
             task = std::move(_tasks.front());

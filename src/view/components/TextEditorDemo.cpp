@@ -153,10 +153,14 @@ void TextEditorDemo::print() noexcept
         ImGui::EndMenuBar();
     }
 
-    ImGui::Text("%6d/%-6d %6d lines  | %s | %s | %s | %s", cpos.mLine + 1, cpos.mColumn + 1, _editor.GetTotalLines(),
+    ImGui::Text("%6d/%-6d %6d lines  | %s | %s | %s | %s",
+                cpos.mLine + 1,
+                cpos.mColumn + 1,
+                _editor.GetTotalLines(),
                 _editor.IsOverwrite() ? "Ovr" : "Ins",
                 _editor.CanUndo() ? "*" : " ",
-                _editor.GetLanguageDefinition().mName.c_str(), "totallyafile.magic");
+                _editor.GetLanguageDefinition().mName.c_str(),
+                "totallyafile.magic");
 
     ImFont* font = ImGui::GetFont();
     ImGui::PushFont(font);

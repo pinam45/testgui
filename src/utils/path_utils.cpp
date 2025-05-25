@@ -12,10 +12,7 @@
 // external
 #include <utf8.h>
 
-utf8_path::utf8_path() noexcept
-    : m_valid_encoding(true)
-    , m_utf8_str()
-    , m_path()
+utf8_path::utf8_path() noexcept : m_valid_encoding(true), m_utf8_str(), m_path()
 {
 }
 
@@ -33,34 +30,22 @@ utf8_path::utf8_path(utf8_path&& other) noexcept
 {
 }
 
-utf8_path::utf8_path(const char* str) noexcept
-    : m_valid_encoding(true)
-    , m_utf8_str(str)
-    , m_path()
+utf8_path::utf8_path(const char* str) noexcept : m_valid_encoding(true), m_utf8_str(str), m_path()
 {
     set_path();
 }
 
-utf8_path::utf8_path(std::string_view str) noexcept
-    : m_valid_encoding(true)
-    , m_utf8_str(str)
-    , m_path()
+utf8_path::utf8_path(std::string_view str) noexcept : m_valid_encoding(true), m_utf8_str(str), m_path()
 {
     set_path();
 }
 
-utf8_path::utf8_path(std::string&& str) noexcept
-    : m_valid_encoding(true)
-    , m_utf8_str(std::move(str))
-    , m_path()
+utf8_path::utf8_path(std::string&& str) noexcept : m_valid_encoding(true), m_utf8_str(std::move(str)), m_path()
 {
     set_path();
 }
 
-utf8_path::utf8_path(const std::filesystem::path& path) noexcept
-    : m_valid_encoding(true)
-    , m_utf8_str()
-    , m_path(path)
+utf8_path::utf8_path(const std::filesystem::path& path) noexcept : m_valid_encoding(true), m_utf8_str(), m_path(path)
 {
     set_str();
 }
@@ -153,6 +138,7 @@ void utf8_path::set_str() noexcept
         m_utf8_str = path_to_generic_utf8_string(m_path);
     }
 }
+
 void utf8_path::set_path() noexcept
 {
     m_valid_encoding = utf8_string_to_path(m_utf8_str, m_path);
@@ -174,7 +160,8 @@ std::ostream& operator<<(std::ostream& os, const utf8_path& utf8_path)
 
 bool utf8_string_to_path(const std::string_view str, std::filesystem::path& path) noexcept
 {
-    static_assert(std::is_same<std::filesystem::path::value_type, wchar_t>::value || std::is_same<std::filesystem::path::value_type, char>::value,
+    static_assert(std::is_same<std::filesystem::path::value_type, wchar_t>::value
+                    || std::is_same<std::filesystem::path::value_type, char>::value,
                   "std::filesystem::path::value_type has an unsupported type");
 
     if constexpr(std::is_same<std::filesystem::path::value_type, wchar_t>::value)
@@ -206,7 +193,8 @@ bool utf8_string_to_path(const std::string_view str, std::filesystem::path& path
 
 bool path_to_generic_utf8_string(const std::filesystem::path& path, std::string& str) noexcept
 {
-    static_assert(std::is_same<std::filesystem::path::value_type, wchar_t>::value || std::is_same<std::filesystem::path::value_type, char>::value,
+    static_assert(std::is_same<std::filesystem::path::value_type, wchar_t>::value
+                    || std::is_same<std::filesystem::path::value_type, char>::value,
                   "std::filesystem::path::value_type has an unsupported type");
 
     if constexpr(std::is_same<std::filesystem::path::value_type, wchar_t>::value)
@@ -238,7 +226,8 @@ bool path_to_generic_utf8_string(const std::filesystem::path& path, std::string&
 
 std::string invalid_utf8_path_representation(const std::filesystem::path& path) noexcept
 {
-    static_assert(std::is_same<std::filesystem::path::value_type, wchar_t>::value || std::is_same<std::filesystem::path::value_type, char>::value,
+    static_assert(std::is_same<std::filesystem::path::value_type, wchar_t>::value
+                    || std::is_same<std::filesystem::path::value_type, char>::value,
                   "std::filesystem::path::value_type has an unsupported type");
 
     std::string str = path_to_generic_utf8_string(path);
@@ -248,7 +237,8 @@ std::string invalid_utf8_path_representation(const std::filesystem::path& path) 
 
 std::filesystem::path utf8_string_to_path(const std::string_view str) noexcept
 {
-    static_assert(std::is_same<std::filesystem::path::value_type, wchar_t>::value || std::is_same<std::filesystem::path::value_type, char>::value,
+    static_assert(std::is_same<std::filesystem::path::value_type, wchar_t>::value
+                    || std::is_same<std::filesystem::path::value_type, char>::value,
                   "std::filesystem::path::value_type has an unsupported type");
 
     if constexpr(std::is_same<std::filesystem::path::value_type, wchar_t>::value)
@@ -272,7 +262,8 @@ std::filesystem::path utf8_string_to_path(const std::string_view str) noexcept
 
 std::string path_to_generic_utf8_string(std::filesystem::path path) noexcept
 {
-    static_assert(std::is_same<std::filesystem::path::value_type, wchar_t>::value || std::is_same<std::filesystem::path::value_type, char>::value,
+    static_assert(std::is_same<std::filesystem::path::value_type, wchar_t>::value
+                    || std::is_same<std::filesystem::path::value_type, char>::value,
                   "std::filesystem::path::value_type has an unsupported type");
 
     if constexpr(std::is_same<std::filesystem::path::value_type, wchar_t>::value)

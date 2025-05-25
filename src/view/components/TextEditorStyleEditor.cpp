@@ -106,10 +106,15 @@ namespace foo {
 
 void TextEditorStyleEditor::print() noexcept
 {
-    ImGui::SetNextWindowSizeConstraints(ImVec2(ImGui::GetContentRegionAvail().x * 0.25f, 0), ImVec2(ImGui::GetContentRegionAvail().x * 0.5f, FLT_MAX));
-    ImGui::BeginChild("ChildL", ImVec2(ImGui::GetContentRegionAvail().x * 0.5f, 0.), ImGuiChildFlags_ResizeX, ImGuiWindowFlags_None);
+    ImGui::SetNextWindowSizeConstraints(ImVec2(ImGui::GetContentRegionAvail().x * 0.25f, 0),
+                                        ImVec2(ImGui::GetContentRegionAvail().x * 0.5f, FLT_MAX));
+    ImGui::BeginChild(
+      "ChildL", ImVec2(ImGui::GetContentRegionAvail().x * 0.5f, 0.), ImGuiChildFlags_ResizeX, ImGuiWindowFlags_None);
     {
-        SCOPE_EXIT { ImGui::EndChild(); };
+        SCOPE_EXIT
+        {
+            ImGui::EndChild();
+        };
         ImFont* font = ImGui::GetFont();
         ImGui::PushFont(font);
         _example_editor.Render("Example editor");
@@ -119,10 +124,14 @@ void TextEditorStyleEditor::print() noexcept
     ImGui::SameLine();
     ImGui::BeginChild("ChildR", ImVec2(0., 0.), ImGuiChildFlags_None, ImGuiWindowFlags_None);
     {
-        SCOPE_EXIT { ImGui::EndChild(); };
+        SCOPE_EXIT
+        {
+            ImGui::EndChild();
+        };
         if(ImGui::Button("Export"))
         {
-            const std::string palette_txt = [&]() {
+            const std::string palette_txt = [&]()
+            {
                 if(_export_style == 0)
                 {
                     return style::palette_cpp256(_text_editor_palette);
@@ -139,23 +148,35 @@ void TextEditorStyleEditor::print() noexcept
             }
         }
         ImGui::SameLine();
-        ImGui::SetNextItemWidth(ImGui::CalcTextSize("To program output").x + ImGui::GetFrameHeight() + ImGui::GetStyle().FramePadding.x * 2.0f);
+        ImGui::SetNextItemWidth(ImGui::CalcTextSize("To program output").x + ImGui::GetFrameHeight()
+                                + ImGui::GetStyle().FramePadding.x * 2.0f);
         ImGui::Combo("##export_dest", &_export_dest, "To Clipboard\0To program output\0");
         ImGui::SameLine();
-        ImGui::SetNextItemWidth(ImGui::CalcTextSize("[0.0, 1.0]").x + ImGui::GetFrameHeight() + ImGui::GetStyle().FramePadding.x * 2.0f);
+        ImGui::SetNextItemWidth(ImGui::CalcTextSize("[0.0, 1.0]").x + ImGui::GetFrameHeight()
+                                + ImGui::GetStyle().FramePadding.x * 2.0f);
         ImGui::Combo("##_export_style", &_export_style, "[0, 255]\0[0.0, 1.0]\0");
 
-        ImGui::BeginChild("##colors", ImVec2(0, -(ImGui::GetFrameHeightWithSpacing() + ImGui::GetStyle().ItemSpacing.y)), ImGuiChildFlags_Border | ImGuiChildFlags_NavFlattened, ImGuiWindowFlags_AlwaysVerticalScrollbar);
+        ImGui::BeginChild("##colors",
+                          ImVec2(0, -(ImGui::GetFrameHeightWithSpacing() + ImGui::GetStyle().ItemSpacing.y)),
+                          ImGuiChildFlags_Border | ImGuiChildFlags_NavFlattened,
+                          ImGuiWindowFlags_AlwaysVerticalScrollbar);
         {
-            SCOPE_EXIT { ImGui::EndChild(); };
+            SCOPE_EXIT
+            {
+                ImGui::EndChild();
+            };
             ImGui::PushItemWidth(ImGui::GetFontSize() * -18);
             {
-                SCOPE_EXIT { ImGui::PopItemWidth(); };
+                SCOPE_EXIT
+                {
+                    ImGui::PopItemWidth();
+                };
                 size_t changed = 0;
                 for(size_t i = 0; i < _text_editor_palette.size(); ++i)
                 {
                     ImVec4 tmp = style::ImVec4_from_ImU32(_text_editor_palette[i]);
-                    changed += ImGui::ColorEdit4(style::color::text_editor::palette_color_name[i].data(), reinterpret_cast<float*>(&tmp));
+                    changed += ImGui::ColorEdit4(style::color::text_editor::palette_color_name[i].data(),
+                                                 reinterpret_cast<float*>(&tmp));
                     _text_editor_palette[i] = ImGui::GetColorU32(tmp);
                 }
                 if(changed > 0)
@@ -168,14 +189,14 @@ void TextEditorStyleEditor::print() noexcept
         // ICON_FA_CIRCLE_CHECK
         if(ImGui::Button(ICON_FA_CHECK_TO_SLOT " Apply"))
         {
-            //TODO
+            // TODO
             _base_text_editor_palette = _text_editor_palette;
             style_changed(style_info{_base_text_editor_palette});
         }
         ImGui::SameLine();
         if(ImGui::Button(ICON_FA_ARROW_ROTATE_LEFT " Revert"))
         {
-            //TODO
+            // TODO
             _text_editor_palette = _base_text_editor_palette;
             _example_editor.SetPalette(_text_editor_palette);
         }

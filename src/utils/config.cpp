@@ -46,7 +46,8 @@ namespace
             }
             else
             {
-                return tl::make_unexpected(fmt::format(FMT_COMPILE("{} has invalid type: {}"), path, fmt::streamed(node.type())));
+                return tl::make_unexpected(
+                  fmt::format(FMT_COMPILE("{} has invalid type: {}"), path, fmt::streamed(node.type())));
             }
         }
         else
@@ -55,7 +56,7 @@ namespace
         }
         return {};
     }
-}// namespace
+} // namespace
 
 std::string config::get_settings_path() noexcept
 {
@@ -88,8 +89,8 @@ tl::expected<config::settings_t, std::string> config::from_file(std::string_view
 tl::expected<void, std::string> config::write_to_file(config::settings_t settings, std::string_view path) noexcept
 {
     toml::table table{
-      {"exemple", toml::table{
-                    {"value", settings.exemple.value}}}};
+      {"exemple", toml::table{{"value", settings.exemple.value}}}
+    };
 
     std::error_code ignored;
     if(std::filesystem::exists(path, ignored))

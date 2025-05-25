@@ -28,4 +28,4 @@ namespace logging
 {
     [[nodiscard]] bool init_logger() noexcept;
     [[nodiscard]] std::shared_ptr<spdlog::logger> get_logger(const std::string& name = "general") noexcept;
-}// namespace logging
+} // namespace logging

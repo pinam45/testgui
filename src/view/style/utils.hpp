@@ -21,7 +21,8 @@ namespace style
         return static_cast<uint8_t>(std::clamp(f, 0.f, 1.f) * 255.f + 0.5f);
     }
 
-    [[nodiscard, gnu::const]] constexpr ImU32 ImU32_from_bytes(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255) noexcept
+    [[nodiscard, gnu::const]] constexpr ImU32
+    ImU32_from_bytes(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255) noexcept
     {
         ImU32 out = r << IM_COL32_R_SHIFT;
         out |= g << IM_COL32_G_SHIFT;
@@ -40,13 +41,13 @@ namespace style
         return ImU32_from_floats(v.x, v.y, v.z, v.w);
     }
 
-    [[nodiscard, gnu::const]] constexpr ImVec4 ImVec4_from_bytes(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255) noexcept
+    [[nodiscard, gnu::const]] constexpr ImVec4
+    ImVec4_from_bytes(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255) noexcept
     {
-        return {
-          static_cast<float>(r) / 255.0f,
-          static_cast<float>(g) / 255.0f,
-          static_cast<float>(b) / 255.0f,
-          static_cast<float>(a) / 255.0f};
+        return {static_cast<float>(r) / 255.0f,
+                static_cast<float>(g) / 255.0f,
+                static_cast<float>(b) / 255.0f,
+                static_cast<float>(a) / 255.0f};
     }
 
     [[nodiscard, gnu::const]] constexpr ImVec4 ImVec4_from_floats(float r, float g, float b, float a = 1.f) noexcept
@@ -56,13 +57,12 @@ namespace style
 
     [[nodiscard, gnu::const]] constexpr ImVec4 ImVec4_from_ImU32(ImU32 v) noexcept
     {
-        return {
-          static_cast<float>((v >> IM_COL32_R_SHIFT) & 0xFF) / 255.0f,
-          static_cast<float>((v >> IM_COL32_G_SHIFT) & 0xFF) / 255.0f,
-          static_cast<float>((v >> IM_COL32_B_SHIFT) & 0xFF) / 255.0f,
-          static_cast<float>((v >> IM_COL32_A_SHIFT) & 0xFF) / 255.0f};
+        return {static_cast<float>((v >> IM_COL32_R_SHIFT) & 0xFF) / 255.0f,
+                static_cast<float>((v >> IM_COL32_G_SHIFT) & 0xFF) / 255.0f,
+                static_cast<float>((v >> IM_COL32_B_SHIFT) & 0xFF) / 255.0f,
+                static_cast<float>((v >> IM_COL32_A_SHIFT) & 0xFF) / 255.0f};
     }
 
     [[nodiscard]] std::string palette_cpp1(const TextEditor::Palette& p) noexcept;
     [[nodiscard]] std::string palette_cpp256(const TextEditor::Palette& p) noexcept;
-}// namespace style
+} // namespace style

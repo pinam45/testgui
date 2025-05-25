@@ -32,7 +32,7 @@ namespace
       spdlog::level::critical,
       spdlog::level::off,
     };
-}// namespace
+} // namespace
 
 LogViewer::LogViewer() noexcept
     : _logs_colors()
@@ -55,11 +55,11 @@ LogViewer::LogViewer() noexcept
 void LogViewer::print() noexcept
 {
     const ImGuiStyle& style = GImGui->Style;
-    ImGui::PushItemWidth(
-      ImGui::CalcTextSize(spdlog::level::to_string_view(spdlog::level::critical).data()).x + ImGui::GetFrameHeight() + 2 * style.ItemInnerSpacing.x);
+    ImGui::PushItemWidth(ImGui::CalcTextSize(spdlog::level::to_string_view(spdlog::level::critical).data()).x
+                         + ImGui::GetFrameHeight() + 2 * style.ItemInnerSpacing.x);
     if(ImGui::BeginCombo("display level", spdlog::level::to_string_view(_log_level).data()))
     {
-        for(spdlog::level::level_enum level : SPDLOG_LEVELS)
+        for(spdlog::level::level_enum level: SPDLOG_LEVELS)
         {
             const bool selected = (_log_level == level);
             if(ImGui::Selectable(spdlog::level::to_string_view(level).data(), selected))
@@ -89,48 +89,49 @@ void LogViewer::print() noexcept
     {
         SPDLOG_LOGGER_TRACE(_logger, "line wrapping ", _auto_scroll ? "enabled" : "disabled");
     }
-    //ImGui::Separator();
+    ImGui::Separator();
 
     if(ImGui::BeginChild("Logs",
                          ImVec2(ImGui::GetContentRegionAvail().x, 0),
                          false,
-                         _wrap_lines ? ImGuiWindowFlags_None
-                                     : ImGuiWindowFlags_HorizontalScrollbar))
+                         _wrap_lines ? ImGuiWindowFlags_None : ImGuiWindowFlags_HorizontalScrollbar))
     {
         if(_wrap_lines)
         {
             ImGui::PushTextWrapPos();
         }
-        STORED_LOGS->iterate_on_logs([this](const store_sink_mt::store_log& log) {
-            if(log.level < _log_level)
-            {
-                return true;
-            }
-            if(log.color_range_start < log.color_range_end)
-            {
-                ImGui::TextUnformatted(log.txt.c_str(), log.txt.c_str() + log.color_range_start);
-                ImGui::SameLine(0, 0);
-                ImGui::PushStyleColor(ImGuiCol_Text, _logs_colors[log.level]);
-                ImGui::TextUnformatted(log.txt.c_str() + log.color_range_start,
-                                       log.txt.c_str() + log.color_range_end);
-                ImGui::PopStyleColor();
-                ImGui::SameLine(0, 0);
+        STORED_LOGS->iterate_on_logs(
+          [this](const store_sink_mt::store_log& log)
+          {
+              if(log.level < _log_level)
+              {
+                  return true;
+              }
+              if(log.color_range_start < log.color_range_end)
+              {
+                  ImGui::TextUnformatted(log.txt.c_str(), log.txt.c_str() + log.color_range_start);
+                  ImGui::SameLine(0, 0);
+                  ImGui::PushStyleColor(ImGuiCol_Text, _logs_colors[log.level]);
+                  ImGui::TextUnformatted(log.txt.c_str() + log.color_range_start,
+                                         log.txt.c_str() + log.color_range_end);
+                  ImGui::PopStyleColor();
+                  ImGui::SameLine(0, 0);
 
-                // cut text for better alignment when line wrapping is enabled
-                const char* pos = log.txt.c_str() + log.color_range_end;
-                ImGui::TextUnformatted(pos, pos + 2);
-                if(pos + 2 < log.txt.c_str() + log.txt.size())
-                {
-                    ImGui::SameLine(0, 0);
-                    ImGui::TextUnformatted(pos + 2, log.txt.c_str() + log.txt.size());
-                }
-            }
-            else
-            {
-                ImGui::TextUnformatted(log.txt.c_str());
-            }
-            return true;
-        });
+                  // cut text for better alignment when line wrapping is enabled
+                  const char* pos = log.txt.c_str() + log.color_range_end;
+                  ImGui::TextUnformatted(pos, pos + 2);
+                  if(pos + 2 < log.txt.c_str() + log.txt.size())
+                  {
+                      ImGui::SameLine(0, 0);
+                      ImGui::TextUnformatted(pos + 2, log.txt.c_str() + log.txt.size());
+                  }
+              }
+              else
+              {
+                  ImGui::TextUnformatted(log.txt.c_str());
+              }
+              return true;
+          });
         if(_wrap_lines)
         {
             ImGui::PopTextWrapPos();

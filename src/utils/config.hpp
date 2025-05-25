@@ -27,16 +27,19 @@ namespace config
         {
             bool value = false;
         } exemple;
-        //TODO
+
+        // TODO
     };
+
     using settings_t = settings;
 
     [[nodiscard]] std::string get_settings_path() noexcept;
     [[nodiscard]] tl::expected<settings_t, std::string> from_file(std::string_view path = get_settings_path()) noexcept;
-    [[nodiscard]] tl::expected<void, std::string> write_to_file(settings_t settings, std::string_view path = get_settings_path()) noexcept;
+    [[nodiscard]] tl::expected<void, std::string> write_to_file(settings_t settings,
+                                                                std::string_view path = get_settings_path()) noexcept;
 
     namespace imgui
     {
         [[nodiscard]] std::string get_ini_settings_path() noexcept;
-    }// namespace imgui
-}// namespace config
+    } // namespace imgui
+} // namespace config

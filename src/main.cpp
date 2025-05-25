@@ -7,10 +7,10 @@
 //
 
 //// magic
-//#if defined(_MSC_VER) || defined(__MINGW32__) || defined(__MINGW64__)
-//#define localtime_r(timer, buf) (localtime_s(buf, timer) ? NULL : buf)
-//#define gmtime_r(timer, buf) (gmtime_s(buf, timer) ? NULL : buf)
-//#endif
+// #if defined(_MSC_VER) || defined(__MINGW32__) || defined(__MINGW64__)
+// #define localtime_r(timer, buf) (localtime_s(buf, timer) ? NULL : buf)
+// #define gmtime_r(timer, buf) (gmtime_s(buf, timer) ? NULL : buf)
+// #endif
 
 // project
 #include <git_info.hpp>
@@ -41,10 +41,10 @@
 #include <backends/imgui_impl_opengl3.h>
 #include <imgui.h>
 #include <imgui_internal.h>
-//#include <impop_datepicker.h>
+// #include <impop_datepicker.h>
 #include <nlohmann/json.hpp>
 #include <spdlog/spdlog.h>
-//#include <impop_footer.h>
+// #include <impop_footer.h>
 #include <implot.h>
 #include <scope_guard.hpp>
 #include <tao/pegtl.hpp>
@@ -145,10 +145,13 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 
     // Text Editor Demo
     Window<TextEditorDemo, ImGuiWindowFlags_MenuBar> text_editor_demo("Text Editor Demo");
-    sigslot::connection con = text_editor_style_editor.content.style_changed.connect([&text_editor_demo](const TextEditorStyleEditor::style_info& style_info) {
-        text_editor_demo.content.set_palette(style_info.palette);
-    });
-    SCOPE_EXIT { con.disconnect(); };
+    sigslot::connection con = text_editor_style_editor.content.style_changed.connect(
+      [&text_editor_demo](const TextEditorStyleEditor::style_info& style_info)
+      { text_editor_demo.content.set_palette(style_info.palette); });
+    SCOPE_EXIT
+    {
+        con.disconnect();
+    };
 
     // ImSpinner Demo
     Window<ImSpinnerDemo> imspinner_demo("ImSpinner Demo");
@@ -180,17 +183,17 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
             ImGuiViewport* viewport = ImGui::GetMainViewport();
             ImGui::SetNextWindowPos(viewport->Pos);
             ImVec2 size = viewport->Size;
-            size.y -= (ImGui::GetFrameHeight() - 1.f);// place for bottom bar
+            size.y -= (ImGui::GetFrameHeight() - 1.f); // place for bottom bar
             ImGui::SetNextWindowSize(size);
             ImGui::SetNextWindowViewport(viewport->ID);
             ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
             ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
             ImGui::Begin("main window",
                          nullptr,
-                         ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove |
-                           ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_MenuBar |
-                           ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoBringToFrontOnFocus |
-                           ImGuiWindowFlags_NoNavFocus);
+                         ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove
+                           | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_MenuBar
+                           | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoBringToFrontOnFocus
+                           | ImGuiWindowFlags_NoNavFocus);
             ImGui::PopStyleVar(2);
 
             // Show menu bar
@@ -209,7 +212,8 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
                             SPDLOG_LOGGER_DEBUG(logger, "Hide interface style editor");
                         }
                     }
-                    if(ImGui::MenuItem(ICON_FA_PAINTBRUSH " Text editor style", nullptr, &text_editor_style_editor.open))
+                    if(ImGui::MenuItem(
+                         ICON_FA_PAINTBRUSH " Text editor style", nullptr, &text_editor_style_editor.open))
                     {
                         if(text_editor_style_editor.open)
                         {
@@ -284,11 +288,18 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
             }
 
             // bottom bar
-            if(ImGui::BeginViewportSideBar("##BottomStatusBar", viewport, ImGuiDir_Down, ImGui::GetFrameHeight(), ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_MenuBar))
+            if(ImGui::BeginViewportSideBar("##BottomStatusBar",
+                                           viewport,
+                                           ImGuiDir_Down,
+                                           ImGui::GetFrameHeight(),
+                                           ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoSavedSettings
+                                             | ImGuiWindowFlags_MenuBar))
             {
                 if(ImGui::BeginMenuBar())
                 {
-                    ImGui::Text("%.3f ms/frame (%.0f FPS)", 1000. / static_cast<double>(ImGui::GetIO().Framerate), static_cast<double>(ImGui::GetIO().Framerate));
+                    ImGui::Text("%.3f ms/frame (%.0f FPS)",
+                                1000. / static_cast<double>(ImGui::GetIO().Framerate),
+                                static_cast<double>(ImGui::GetIO().Framerate));
 
                     float right_content_size_x = 0;
                     right_content_size_x += ImGui::CalcTextSize(version_info::full_v.data()).x;
@@ -307,7 +318,8 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
                         right_content_size_x += ImGui::GetCurrentContext()->Style.ItemSpacing.x;
                         right_content_size_x += ImGui::CalcTextSize("dirty").x;
                     }
-                    ImGui::SetCursorPosX(ImGui::GetCursorPos().x + ImGui::GetContentRegionAvail().x - right_content_size_x);
+                    ImGui::SetCursorPosX(ImGui::GetCursorPos().x + ImGui::GetContentRegionAvail().x
+                                         - right_content_size_x);
 
                     ImGui::Text("%s", version_info::full_v.data());
                     ImGui::Text("|");
@@ -334,8 +346,8 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
             if(ImGui::DockBuilderGetNode(dockspace_id) == nullptr)
             {
                 // Main dockspace initial setup
-                ImGui::DockBuilderRemoveNode(dockspace_id);// Clear out existing layout
-                ImGui::DockBuilderAddNode(dockspace_id);   // Add empty node
+                ImGui::DockBuilderRemoveNode(dockspace_id); // Clear out existing layout
+                ImGui::DockBuilderAddNode(dockspace_id); // Add empty node
                 ImGui::DockBuilderSetNodeSize(dockspace_id, ImGui::GetMainViewport()->Size);
 
                 ImGuiID dock_main_id = dockspace_id;
@@ -403,7 +415,9 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
                 ImGui::EndTable();
             }
 
-            ImGui::SetCursorPosX(ImGui::GetCursorPos().x + ImGui::GetContentRegionAvail().x - (ImGui::CalcTextSize("OK").x + 2 * ImGui::GetCurrentContext()->Style.FramePadding.x));
+            ImGui::SetCursorPosX(
+              ImGui::GetCursorPos().x + ImGui::GetContentRegionAvail().x
+              - (ImGui::CalcTextSize("OK").x + 2 * ImGui::GetCurrentContext()->Style.FramePadding.x));
             if(ImGui::Button("OK"))
             {
                 ImGui::CloseCurrentPopup();
@@ -466,20 +480,21 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
             font::push(font::LARGE_FONT_SIZE);
             ImGui::Begin("Test");
 
-            //if(ImPop::DatePicker("date", &t, &default_time, &min_time, &max_time))
+            // if(ImPop::DatePicker("date", &t, &default_time, &min_time, &max_time))
             //{
-            //    // `t` has been updated
-            //}
+            //     // `t` has been updated
+            // }
 
             if(ImGui::Button(ICON_FA_WAND_MAGIC_SPARKLES " do something"))
             {
-                test_future = tp.submit([]() -> std::string {
-                    std::this_thread::sleep_for(std::chrono::seconds(1));
-                    return "test";
-                });
+                test_future = tp.submit(
+                  []() -> std::string
+                  {
+                      std::this_thread::sleep_for(std::chrono::seconds(1));
+                      return "test";
+                  });
             }
-            if(test_future.valid() && test_future.wait_for(std::chrono::seconds(0)) ==
-                                        std::future_status::ready)
+            if(test_future.valid() && test_future.wait_for(std::chrono::seconds(0)) == std::future_status::ready)
             {
                 test = test_future.get();
                 test_future = {};
@@ -507,7 +522,8 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, style::color::interface::warning_active);
             if(ImGui::Button("Warning"))
             {
-                ImGui::InsertNotification({ImGuiToastType::Warning, 3000, "Hello World! This is a warning! %d", 0x1337});
+                ImGui::InsertNotification(
+                  {ImGuiToastType::Warning, 3000, "Hello World! This is a warning! %d", 0x1337});
             }
             ImGui::PopStyleColor(3);
 
@@ -518,7 +534,8 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, style::color::interface::error_active);
             if(ImGui::Button("Error"))
             {
-                ImGui::InsertNotification({ImGuiToastType::Error, 3000, "Hello World! This is an error! 0x%X", 0xDEADBEEF});
+                ImGui::InsertNotification(
+                  {ImGuiToastType::Error, 3000, "Hello World! This is an error! 0x%X", 0xDEADBEEF});
             }
             ImGui::PopStyleColor(3);
 
@@ -540,7 +557,11 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, style::color::interface::primary_active);
             if(ImGui::Button("Long info"))
             {
-                ImGui::InsertNotification({ImGuiToastType::Info, 3000, "Hi, I'm a long notification. I'm here to show you that you can write a lot of text in me. I'm also here to show you that I can wrap text, so you don't have to worry about that."});
+                ImGui::InsertNotification(
+                  {ImGuiToastType::Info,
+                   3000,
+                   "Hi, I'm a long notification. I'm here to show you that you can write a lot of text in me. I'm also "
+                   "here to show you that I can wrap text, so you don't have to worry about that."});
             }
             ImGui::PopStyleColor(3);
 
@@ -551,7 +572,12 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, style::color::interface::secondary_active);
             if(ImGui::Button("Error with button"))
             {
-                ImGui::InsertNotification({ImGuiToastType::Error, 3000, "Click me!", []() { ImGui::InsertNotification({ImGuiToastType::Success, 3000, "Thanks for clicking!"}); }, "Notification content"});
+                ImGui::InsertNotification(
+                  {ImGuiToastType::Error,
+                   3000,
+                   "Click me!",
+                   []() { ImGui::InsertNotification({ImGuiToastType::Success, 3000, "Thanks for clicking!"}); },
+                   "Notification content"});
             }
             ImGui::PopStyleColor(3);
 
@@ -559,7 +585,7 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 
             if(ImGui::Button("Custom title"))
             {
-                ImGuiToast toast(ImGuiToastType::Success, 3000);// <-- content can also be passed here as above
+                ImGuiToast toast(ImGuiToastType::Success, 3000); // <-- content can also be passed here as above
                 toast.setTitle("This is a %s title %d", "wonderful", 3);
                 toast.setContent("Lorem ipsum dolor sit amet");
                 ImGui::InsertNotification(toast);
@@ -612,7 +638,7 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
         }
 
         // Perf footer
-        //ImPop::PerfFooter();
+        // ImPop::PerfFooter();
 
         // Rendering
         ImGui::RenderNotifications();
@@ -636,13 +662,15 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
         SPDLOG_LOGGER_ERROR(logger, "failed to save settings to {}: {}", settings_path, res.error());
     }
 
-    nlohmann::json a = {{"pi", 3.141},
-                        {"happy", true},
-                        {"name", "Niels"},
-                        {"nothing", nullptr},
-                        {"answer", {{"everything", 42}}},
-                        {"list", {1, 0, 2}},
-                        {"object", {{"currency", "USD"}, {"value", 42.99}}}};
+    nlohmann::json a = {
+      {"pi",      3.141                                  },
+      {"happy",   true                                   },
+      {"name",    "Niels"                                },
+      {"nothing", nullptr                                },
+      {"answer",  {{"everything", 42}}                   },
+      {"list",    {1, 0, 2}                              },
+      {"object",  {{"currency", "USD"}, {"value", 42.99}}}
+    };
     SPDLOG_INFO("test, {}", a.dump(4));
 
     tl::expected<void, std::string> b;

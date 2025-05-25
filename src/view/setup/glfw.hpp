@@ -17,7 +17,7 @@ using glfw_handle_t = std::shared_ptr<glfw_context>;
 namespace setup
 {
     glfw_handle_t glfw() noexcept;
-}
+} // namespace setup
 
 struct glfw_context
 {

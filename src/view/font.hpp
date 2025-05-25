@@ -39,4 +39,4 @@ namespace font
     void push(embedded font, float size = DEFAULT_FONT_SIZE) noexcept;
     void push(float size) noexcept;
     void pop() noexcept;
-}// namespace font
+} // namespace font

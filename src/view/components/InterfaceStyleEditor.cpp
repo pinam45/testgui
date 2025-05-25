@@ -13,8 +13,7 @@
 #include <utils/log.hpp>
 #include <view/style/colors.hpp>
 
-InterfaceStyleEditor::InterfaceStyleEditor() noexcept
-    : _logger(logging::get_logger("InterfaceStyleEditor"))
+InterfaceStyleEditor::InterfaceStyleEditor() noexcept : _logger(logging::get_logger("InterfaceStyleEditor"))
 {
 }
 

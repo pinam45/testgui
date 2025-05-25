@@ -14,12 +14,13 @@
 
 // external
 #include <glad/gl.h>
+// glad before glfw
 #include <GLFW/glfw3.h>
 
 namespace
 {
     std::weak_ptr<glfw_context> glfw_existing_context;
-}
+} // namespace
 
 static void glfw_error_callback(int error, const char* description)
 {

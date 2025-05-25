@@ -1,6 +1,6 @@
 #if defined(_WIN32)
 
-#include <windows.h>
+#    include <windows.h>
 
 extern int main(int argc, char* argv[]);
 

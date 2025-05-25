@@ -25,7 +25,7 @@
 namespace
 {
     constexpr bool enable_console_log = true;
-}// namespace
+} // namespace
 
 const std::shared_ptr<spdlog::logger> NULL_LOGGER =
   std::make_shared<spdlog::logger>("null", std::make_shared<spdlog::sinks::null_sink_mt>());
@@ -39,7 +39,7 @@ namespace
     constexpr std::size_t LOG_MAX_FILES = 3;
 
     std::vector<spdlog::sink_ptr> sinks;
-}// namespace
+} // namespace
 
 bool logging::init_logger() noexcept
 {
@@ -53,8 +53,7 @@ bool logging::init_logger() noexcept
 
         // File sink
         std::shared_ptr<spdlog::sinks::sink> file_sink =
-          std::make_shared<spdlog::sinks::rotating_file_sink_mt>(
-            LOG_FILENAME, LOG_MAX_SIZE, LOG_MAX_FILES);
+          std::make_shared<spdlog::sinks::rotating_file_sink_mt>(LOG_FILENAME, LOG_MAX_SIZE, LOG_MAX_FILES);
         assert(file_sink != nullptr);
         file_sink->set_level(spdlog::level::trace);
         sinks.push_back(file_sink);
@@ -62,10 +61,9 @@ bool logging::init_logger() noexcept
         // Console sink
         if constexpr(enable_console_log)
         {
-            std::shared_ptr<spdlog::sinks::sink> console_sink =
-              std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
+            std::shared_ptr<spdlog::sinks::sink> console_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
             assert(console_sink != nullptr);
-            console_sink->set_level(spdlog::level::warn);
+            console_sink->set_level(spdlog::level::trace);
             sinks.push_back(console_sink);
         }
 

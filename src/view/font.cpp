@@ -30,14 +30,13 @@ namespace
         const unsigned int* data = nullptr;
         unsigned int size = 0;
     };
+
     struct font_id
     {
         font::embedded font = font::DEFAULT_FONT;
         float size = font::DEFAULT_FONT_SIZE;
 
-        font_id(font::embedded _font, float _size) noexcept
-            : font(_font)
-            , size(_size)
+        font_id(font::embedded _font, float _size) noexcept : font(_font), size(_size)
         {
         }
 
@@ -51,6 +50,7 @@ namespace
             return !(rhs == *this);
         }
     };
+
     struct font_id_hash
     {
         size_t operator()(const font_id& id) const noexcept
@@ -58,12 +58,14 @@ namespace
             return std::hash<font::embedded>{}(id.font) ^ std::hash<float>{}(id.size);
         }
     };
+
     struct font_info
     {
         std::mutex fonts_mutex{};
         std::unordered_map<font_id, ImFont*, font_id_hash> loaded_fonts{};
         std::stack<font_id> fonts_stack{};
     };
+
     font_info DATA;
 
     [[nodiscard]] font_data get_data(font::embedded font) noexcept
@@ -97,12 +99,7 @@ namespace
         static constexpr ImWchar font_ranges[] = {0x0001, 0xFFFF, 0};
         font_data data = get_data(font);
         ImFont* base_font =
-          io.Fonts->AddFontFromMemoryCompressedTTF(
-            data.data,
-            static_cast<int>(data.size),
-            size,
-            nullptr,
-            font_ranges);
+          io.Fonts->AddFontFromMemoryCompressedTTF(data.data, static_cast<int>(data.size), size, nullptr, font_ranges);
         if(base_font)
         {
             SPDLOG_LOGGER_DEBUG(logger, "Loaded font DroidSans {:.2f}px", size);
@@ -121,12 +118,11 @@ namespace
         icons_config.PixelSnapH = true;
         icons_config.GlyphMinAdvanceX = size;
         ImFont* merged_font =
-          io.Fonts->AddFontFromMemoryCompressedTTF(
-            FontAwesome6_solid_compressed_data,
-            static_cast<int>(FontAwesome6_solid_compressed_size),
-            icon_size,
-            &icons_config,
-            icons_ranges);
+          io.Fonts->AddFontFromMemoryCompressedTTF(FontAwesome6_solid_compressed_data,
+                                                   static_cast<int>(FontAwesome6_solid_compressed_size),
+                                                   icon_size,
+                                                   &icons_config,
+                                                   icons_ranges);
         if(merged_font)
         {
             SPDLOG_LOGGER_DEBUG(logger, "Loaded font FontAwesome6-solid {:.2f}px", icon_size);
@@ -148,7 +144,7 @@ namespace
         }
         return merged_font;
     }
-}// namespace
+} // namespace
 
 font::guard::guard(embedded font, float size) noexcept
 {
@@ -174,7 +170,7 @@ void font::preload(embedded font, float size) noexcept
         return;
     }
     imgui_font = load_font(font, size);
-    //ImGui::SFML::UpdateFontTexture();
+    // ImGui::SFML::UpdateFontTexture();
 }
 
 void font::push(embedded font, float size) noexcept
@@ -184,7 +180,7 @@ void font::push(embedded font, float size) noexcept
     if(imgui_font == nullptr)
     {
         imgui_font = load_font(font, size);
-        //ImGui::SFML::UpdateFontTexture();
+        // ImGui::SFML::UpdateFontTexture();
     }
     DATA.fonts_stack.emplace(font, size);
     ImGui::PushFont(imgui_font);
@@ -202,7 +198,7 @@ void font::push(float size) noexcept
     if(imgui_font == nullptr)
     {
         imgui_font = load_font(font, size);
-        //ImGui::SFML::UpdateFontTexture();
+        // ImGui::SFML::UpdateFontTexture();
     }
     DATA.fonts_stack.emplace(font, size);
     ImGui::PushFont(imgui_font);

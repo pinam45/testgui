@@ -89,7 +89,7 @@ template<typename T>
 void store_sink<Mutex>::iterate_on_logs(T callable)
 {
     std::lock_guard<Mutex> lock(spdlog::sinks::base_sink<Mutex>::mutex_);
-    for(const auto& log : logs)
+    for(const auto& log: logs)
     {
         if(!callable(log))
         {
@@ -103,10 +103,8 @@ void store_sink<Mutex>::sink_it_(const spdlog::details::log_msg& msg)
 {
     spdlog::memory_buf_t formatted;
     formatter->format(msg, formatted);
-    logs.emplace_back(msg.level,
-                      std::string(formatted.data(), formatted.size()),
-                      msg.color_range_start,
-                      msg.color_range_end);
+    logs.emplace_back(
+      msg.level, std::string(formatted.data(), formatted.size()), msg.color_range_start, msg.color_range_end);
     auto console_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
 }
 

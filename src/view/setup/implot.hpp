@@ -17,7 +17,7 @@ using implot_handle_t = std::shared_ptr<implot_context>;
 namespace setup
 {
     implot_handle_t implot() noexcept;
-}
+} // namespace setup
 
 struct implot_context
 {

@@ -27,14 +27,18 @@ namespace
 
     std::string colortxt256(const ImVec4& color) noexcept
     {
-        return fmt::format("{}, {}, {}, {}", style::byte_from_float(color.x), style::byte_from_float(color.y), style::byte_from_float(color.z), style::byte_from_float(color.w));
+        return fmt::format("{}, {}, {}, {}",
+                           style::byte_from_float(color.x),
+                           style::byte_from_float(color.y),
+                           style::byte_from_float(color.z),
+                           style::byte_from_float(color.w));
     }
 
     std::string colortxt256(ImU32 color) noexcept
     {
         return colortxt256(style::ImVec4_from_ImU32(color));
     }
-}// namespace
+} // namespace
 
 std::string style::palette_cpp1(const TextEditor::Palette& p) noexcept
 {
@@ -106,7 +110,6 @@ std::string style::palette_cpp1(const TextEditor::Palette& p) noexcept
                        colortxt1(p[30]),
                        colortxt1(p[31]));
 }
-
 
 std::string style::palette_cpp256(const TextEditor::Palette& p) noexcept
 {

@@ -12,8 +12,7 @@
 // project
 #include <utils/log.hpp>
 
-ImSpinnerDemo::ImSpinnerDemo() noexcept
-    : _logger(logging::get_logger("ImSpinnerDemo"))
+ImSpinnerDemo::ImSpinnerDemo() noexcept : _logger(logging::get_logger("ImSpinnerDemo"))
 {
 }
 

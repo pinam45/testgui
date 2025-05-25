@@ -46,6 +46,7 @@ private:
     std::string m_utf8_str;
     std::filesystem::path m_path;
 };
+
 std::ostream& operator<<(std::ostream& os, const utf8_path& utf8_path);
 
 // Convert an utf8 string to a path.
@@ -54,8 +55,7 @@ std::ostream& operator<<(std::ostream& os, const utf8_path& utf8_path);
 
 // Convert a path to a generic utf8 string.
 // return false on error, true on success
-[[nodiscard]] bool path_to_generic_utf8_string(const std::filesystem::path& path,
-                                               std::string& str) noexcept;
+[[nodiscard]] bool path_to_generic_utf8_string(const std::filesystem::path& path, std::string& str) noexcept;
 
 // Generate a debug representation of an invalid utf8 path.
 // use to log when path_to_generic_utf8_string() fail (return false) to get a string with

@@ -22,9 +22,11 @@ public:
     {
         TextEditor::Palette palette;
     };
+
     sigslot::signal<style_info> style_changed;
 
-    explicit TextEditorStyleEditor(const TextEditor::Palette& text_editor_palette = style::color::text_editor::palette) noexcept;
+    explicit TextEditorStyleEditor(
+      const TextEditor::Palette& text_editor_palette = style::color::text_editor::palette) noexcept;
 
     TextEditorStyleEditor(const TextEditorStyleEditor&) = delete;
     TextEditorStyleEditor(TextEditorStyleEditor&&) noexcept = default;

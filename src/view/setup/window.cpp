@@ -14,19 +14,17 @@
 #include <view/setup/glfw.hpp>
 
 // external
-#include <GLFW/glfw3.h>
 #include <glad/gl.h>
+// glad before glfw
+#include <GLFW/glfw3.h>
 
 namespace
 {
     std::weak_ptr<main_window_context> main_window_existing_context;
-}
+} // namespace
 
-main_window_handle_t setup::main_window(
-  const glfw_handle_t& glfw_handle,
-  std::string_view name,
-  size_t width,
-  size_t height) noexcept
+main_window_handle_t
+setup::main_window(const glfw_handle_t& glfw_handle, std::string_view name, size_t width, size_t height) noexcept
 {
     if(glfw_handle == nullptr)
     {

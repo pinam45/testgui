@@ -12,6 +12,7 @@
 
 // external
 #include <glad/gl.h>
+// glad before glfw
 #include <GLFW/glfw3.h>
 
 // C++ standard
@@ -24,12 +25,16 @@ using main_window_handle_t = std::shared_ptr<main_window_context>;
 
 namespace setup
 {
-    main_window_handle_t main_window(const glfw_handle_t& glfw_handle, std::string_view name, size_t width = 1280, size_t height = 720) noexcept;
-}
+    main_window_handle_t main_window(const glfw_handle_t& glfw_handle,
+                                     std::string_view name,
+                                     size_t width = 1280,
+                                     size_t height = 720) noexcept;
+} // namespace setup
 
 struct main_window_context
 {
-    friend main_window_handle_t setup::main_window(const glfw_handle_t& glfw_handle, std::string_view name, size_t width, size_t height) noexcept;
+    friend main_window_handle_t
+    setup::main_window(const glfw_handle_t& glfw_handle, std::string_view name, size_t width, size_t height) noexcept;
 
 private:
     main_window_context() noexcept = default;

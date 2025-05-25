@@ -10,4 +10,4 @@
 namespace style
 {
     void setup_imgui() noexcept;
-}// namespace style
+} // namespace style

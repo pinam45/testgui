@@ -15,7 +15,7 @@
 namespace
 {
     std::weak_ptr<implot_context> implot_existing_context;
-}
+} // namespace
 
 implot_handle_t setup::implot() noexcept
 {
