@@ -178,8 +178,8 @@ target_compile_definitions(
   TOML_EXCEPTIONS=0
 )
 
-# Build in C++17
-target_compile_features(testgui PRIVATE cxx_std_17)
+# Build in C++20
+target_compile_features(testgui PRIVATE cxx_std_20)
 
 # Add warning flags
 target_add_cxx_warning_flags(testgui)
