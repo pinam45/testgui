@@ -194,6 +194,21 @@ set_property(
   VS_STARTUP_PROJECT testgui
 )
 
+# Generate format target
+find_program(CLANG_FORMAT clang-format)
+if(${CLANG_FORMAT} STREQUAL CLANG_FORMAT-NOTFOUND)
+    message(WARNING "clang-format not found, format targets not generated")
+else()
+    message(STATUS "clang-format found: ${CLANG_FORMAT}")
+    add_custom_target(
+      format-testgui
+      COMMAND "${CLANG_FORMAT}" -style=file -i ${sources} ${includes}
+      WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+      VERBATIM
+    )
+    set_target_properties(format-testgui PROPERTIES FOLDER "format")
+endif()
+
 # Install
 include(GNUInstallDirs)
 install(TARGETS testgui)
