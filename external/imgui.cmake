@@ -18,7 +18,7 @@ list(APPEND CMAKE_MESSAGE_INDENT "  ")
 
 # Dependencies
 include(${CMAKE_CURRENT_SOURCE_DIR}/external/glfw.cmake)
-include(${CMAKE_CURRENT_SOURCE_DIR}/external/gl3w.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/external/glad.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/external/opengl.cmake)
 
 # Custom CMake project

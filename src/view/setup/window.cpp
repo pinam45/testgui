@@ -15,6 +15,7 @@
 
 // external
 #include <GLFW/glfw3.h>
+#include <glad/gl.h>
 
 namespace
 {
@@ -38,18 +39,37 @@ main_window_handle_t setup::main_window(
         return context;
     }
 
-    const std::shared_ptr<spdlog::logger> logger = logging::get_logger("glfw");
-
-    context.reset(new main_window_context());
-    context->glf_window = glfwCreateWindow(static_cast<int>(width), static_cast<int>(height), name.data(), nullptr, nullptr);
-    if(context->glf_window == nullptr)
     {
-        logger->error("glfwCreateWindow failed");
-        return nullptr;
+        std::shared_ptr<spdlog::logger> glfw_logger = logging::get_logger("glfw");
+
+        context.reset(new main_window_context());
+        context->glf_window =
+          glfwCreateWindow(static_cast<int>(width), static_cast<int>(height), name.data(), nullptr, nullptr);
+        if(context->glf_window == nullptr)
+        {
+            glfw_logger->error("glfwCreateWindow failed");
+            return nullptr;
+        }
+
+        glfwMakeContextCurrent(context->glf_window);
+        glfwSwapInterval(1); // Enable vsync
+
+        glfw_logger->debug("Created window with size {} x {}", width, height);
     }
 
-    glfwMakeContextCurrent(context->glf_window);
-    glfwSwapInterval(1);// Enable vsync
+    {
+        std::shared_ptr<spdlog::logger> glad_logger = logging::get_logger("glad");
+
+        // Load OpenGL functions, gladLoadGL returns the loaded version, 0 on error.
+        const int version = gladLoadGL(glfwGetProcAddress);
+        if(version == 0)
+        {
+            glad_logger->error("gladLoadGL failed");
+            return nullptr;
+        }
+
+        glad_logger->debug("Loaded OpenGL {}.{}", GLAD_VERSION_MAJOR(version), GLAD_VERSION_MINOR(version));
+    }
 
     // register context
     main_window_existing_context = context;

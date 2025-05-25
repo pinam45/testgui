@@ -26,9 +26,9 @@ namespace
     std::string imgui_ini_filename;
 }// namespace
 
-imgui_handle_t setup::imgui(const main_window_handle_t& main_window_handle, const gl3w_handle_t& gl3w_handle) noexcept
+imgui_handle_t setup::imgui(const main_window_handle_t& main_window_handle) noexcept
 {
-    if(main_window_handle == nullptr || gl3w_handle == nullptr)
+    if(main_window_handle == nullptr)
     {
         return nullptr;
     }

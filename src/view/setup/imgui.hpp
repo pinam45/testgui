@@ -9,7 +9,6 @@
 
 // project
 #include <view/setup/window.hpp>
-#include <view/setup/gl3w.hpp>
 
 // C++ standard
 #include <memory>
@@ -20,12 +19,12 @@ using imgui_handle_t = std::shared_ptr<imgui_context>;
 
 namespace setup
 {
-    imgui_handle_t imgui(const main_window_handle_t& main_window_handle, const gl3w_handle_t& gl3w_handle) noexcept;
+    imgui_handle_t imgui(const main_window_handle_t& main_window_handle) noexcept;
 }
 
 struct imgui_context
 {
-    friend imgui_handle_t setup::imgui(const main_window_handle_t& main_window_handle, const gl3w_handle_t& gl3w_handle) noexcept;
+    friend imgui_handle_t setup::imgui(const main_window_handle_t& main_window_handle) noexcept;
 
 private:
     imgui_context() noexcept = default;

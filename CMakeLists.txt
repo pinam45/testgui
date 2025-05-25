@@ -102,7 +102,7 @@ set_property(GLOBAL PROPERTY PREDEFINED_TARGETS_FOLDER "_CMake")
 # Dependencies
 include(fmt)
 include(glfw)
-include(gl3w)
+include(glad)
 include(opengl)
 include(imgui)
 include(implot)
@@ -147,7 +147,7 @@ target_link_libraries(
   testgui PRIVATE
   fmt::fmt
   glfw::glfw
-  gl3w::gl3w
+  glad::glad_gl_core_33
   OpenGL::GL
   imgui::imgui
   implot::implot

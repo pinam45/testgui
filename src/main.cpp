@@ -25,7 +25,6 @@
 #include <view/components/TextEditorDemo.hpp>
 #include <view/components/TextEditorStyleEditor.hpp>
 #include <view/font.hpp>
-#include <view/setup/gl3w.hpp>
 #include <view/setup/glfw.hpp>
 #include <view/setup/imgui.hpp>
 #include <view/setup/implot.hpp>
@@ -93,13 +92,7 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
         logger->error("main window setup failed");
         return EXIT_FAILURE;
     }
-    gl3w_handle_t gl3w_handle = setup::gl3w();
-    if(gl3w_handle == nullptr)
-    {
-        logger->error("gl3w setup failed");
-        return EXIT_FAILURE;
-    }
-    imgui_handle_t imgui_handle = setup::imgui(main_window_handle, gl3w_handle);
+    imgui_handle_t imgui_handle = setup::imgui(main_window_handle);
     if(imgui_handle == nullptr)
     {
         logger->error("imgui setup failed");

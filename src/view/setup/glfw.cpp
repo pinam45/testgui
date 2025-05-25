@@ -13,6 +13,7 @@
 #include <utils/log.hpp>
 
 // external
+#include <glad/gl.h>
 #include <GLFW/glfw3.h>
 
 namespace
@@ -46,6 +47,7 @@ glfw_handle_t setup::glfw() noexcept
     // glsl version 330
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     // register context
     context.reset(new glfw_context());

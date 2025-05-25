@@ -51,7 +51,7 @@ target_include_directories(
 target_link_libraries(
   imgui PUBLIC
   glfw::glfw
-  gl3w::gl3w
+  glad::glad_gl_core_33
   OpenGL::GL
 )
 

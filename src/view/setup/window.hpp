@@ -11,6 +11,7 @@
 #include <view/setup/glfw.hpp>
 
 // external
+#include <glad/gl.h>
 #include <GLFW/glfw3.h>
 
 // C++ standard
