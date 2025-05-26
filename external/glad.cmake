@@ -19,14 +19,10 @@ list(APPEND CMAKE_MESSAGE_INDENT "  ")
 # Download
 FetchContent_Populate(
   glad
-  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/glad-src"
-  BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/glad-build"
-  SUBBUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/glad-subbuild"
   GIT_REPOSITORY "https://github.com/Dav1dde/glad"
   GIT_TAG "v2.0.8"
   GIT_SHALLOW ON
   GIT_PROGRESS ON
-  UPDATE_DISCONNECTED ON
 )
 
 # requirements:

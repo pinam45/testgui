@@ -19,14 +19,10 @@ list(APPEND CMAKE_MESSAGE_INDENT "  ")
 # Download
 FetchContent_Populate(
   scope_guard
-  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/scope_guard-src"
-  BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/scope_guard-build"
-  SUBBUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/scope_guard-subbuild"
   GIT_REPOSITORY "https://github.com/Neargye/scope_guard"
   GIT_TAG "v0.9.1"
   GIT_SHALLOW ON
   GIT_PROGRESS ON
-  UPDATE_DISCONNECTED ON
 )
 
 # Import

@@ -19,14 +19,10 @@ list(APPEND CMAKE_MESSAGE_INDENT "  ")
 # Download
 FetchContent_Populate(
   fmt
-  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/fmt-src"
-  BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/fmt-build"
-  SUBBUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/fmt-subbuild"
   GIT_REPOSITORY "https://github.com/fmtlib/fmt"
   GIT_TAG "11.2.0"
   GIT_SHALLOW ON
   GIT_PROGRESS ON
-  UPDATE_DISCONNECTED ON
 )
 
 # Import

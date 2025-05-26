@@ -19,14 +19,10 @@ list(APPEND CMAKE_MESSAGE_INDENT "  ")
 # Download
 FetchContent_Populate(
   sigslot
-  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/sigslot-src"
-  BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/sigslot-build"
-  SUBBUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/sigslot-subbuild"
   GIT_REPOSITORY "https://github.com/palacaze/sigslot"
   GIT_TAG "v1.2.2"
   GIT_SHALLOW ON
   GIT_PROGRESS ON
-  UPDATE_DISCONNECTED ON
 )
 
 # Import

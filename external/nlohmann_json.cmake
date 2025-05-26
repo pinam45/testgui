@@ -19,14 +19,10 @@ list(APPEND CMAKE_MESSAGE_INDENT "  ")
 # Download
 FetchContent_Populate(
   nlohmann_json
-  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/nlohmann_json-src"
-  BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/nlohmann_json-build"
-  SUBBUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/nlohmann_json-subbuild"
   GIT_REPOSITORY "https://github.com/nlohmann/json"
   GIT_TAG "v3.11.3"
   GIT_SHALLOW ON
   GIT_PROGRESS ON
-  UPDATE_DISCONNECTED ON
 )
 
 # Import

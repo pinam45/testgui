@@ -12,14 +12,9 @@ set_source_files_properties(${global_generated_files_list} PROPERTIES GENERATED 
 # Download impop
 FetchContent_Populate(
   impop
-  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/impop-src"
-  BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/impop-build"
-  SUBBUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/impop-subbuild"
   GIT_REPOSITORY "https://github.com/kfish/impop"
   GIT_TAG "a09c12f43ed6484430f166d197ea34406fe1b72c"
-  #GIT_SHALLOW ON
   GIT_PROGRESS ON
-  UPDATE_DISCONNECTED ON
 )
 
 # Declare impop

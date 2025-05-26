@@ -19,14 +19,10 @@ list(APPEND CMAKE_MESSAGE_INDENT "  ")
 # Download
 FetchContent_Populate(
   curl
-  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/curl-src"
-  BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/curl-build"
-  SUBBUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/curl-subbuild"
   GIT_REPOSITORY "https://github.com/curl/curl"
   GIT_TAG "curl-8_9_1"
   GIT_SHALLOW ON
   GIT_PROGRESS ON
-  UPDATE_DISCONNECTED ON
 )
 
 # Import

@@ -19,14 +19,10 @@ list(APPEND CMAKE_MESSAGE_INDENT "  ")
 # Download
 FetchContent_Populate(
   glfw
-  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/glfw-src"
-  BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/glfw-build"
-  SUBBUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/glfw-subbuild"
   GIT_REPOSITORY "https://github.com/glfw/glfw"
   GIT_TAG "3.3.8"
   GIT_SHALLOW ON
   GIT_PROGRESS ON
-  UPDATE_DISCONNECTED ON
 )
 
 # requirements:

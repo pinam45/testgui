@@ -12,14 +12,10 @@ set_source_files_properties(${global_generated_files_list} PROPERTIES GENERATED 
 # Download imgui
 FetchContent_Populate(
   imgui
-  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/imgui-src"
-  BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/imgui-build"
-  SUBBUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/imgui-subbuild"
   GIT_REPOSITORY "https://github.com/ocornut/imgui"
   GIT_TAG "v1.90.9-docking"
   GIT_SHALLOW ON
   GIT_PROGRESS ON
-  UPDATE_DISCONNECTED ON
 )
 
 # Declare imgui

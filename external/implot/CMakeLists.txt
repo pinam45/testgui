@@ -12,14 +12,9 @@ set_source_files_properties(${global_generated_files_list} PROPERTIES GENERATED 
 # Download implot
 FetchContent_Populate(
   implot
-  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/implot-src"
-  BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/implot-build"
-  SUBBUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/implot-subbuild"
   GIT_REPOSITORY "https://github.com/epezent/implot"
   GIT_TAG "f156599faefe316f7dd20fe6c783bf87c8bb6fd9"
-  #GIT_SHALLOW ON
   GIT_PROGRESS ON
-  UPDATE_DISCONNECTED ON
 )
 
 # Declare implot

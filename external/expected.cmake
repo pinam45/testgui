@@ -19,14 +19,10 @@ list(APPEND CMAKE_MESSAGE_INDENT "  ")
 # Download
 FetchContent_Populate(
   expected
-  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/expected-src"
-  BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/expected-build"
-  SUBBUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/expected-subbuild"
   GIT_REPOSITORY "https://github.com/TartanLlama/expected"
   GIT_TAG "v1.1.0"
   GIT_SHALLOW ON
   GIT_PROGRESS ON
-  UPDATE_DISCONNECTED ON
 )
 
 # Import

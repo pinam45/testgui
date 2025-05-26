@@ -9,18 +9,20 @@
 # Fix for CMake pre 3.20 behaviour, see CMP0118
 set_source_files_properties(${global_generated_files_list} PROPERTIES GENERATED ON)
 
+# Patch file path
+file(TO_CMAKE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/fix.patch" PATCH_FILE)
+
 # Download ImGuiColorTextEdit
 FetchContent_Populate(
   imguicolortextedit
-  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/imguicolortextedit-src"
-  BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/imguicolortextedit-build"
-  SUBBUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/imguicolortextedit-subbuild"
   GIT_REPOSITORY "https://github.com/dfranx/ImGuiColorTextEdit"
   GIT_TAG "fb08648c87f5c872c268e11708ee518d60ed3e8e"
-  #GIT_SHALLOW ON
+  GIT_SHALLOW ON
   GIT_PROGRESS ON
-  PATCH_COMMAND git apply --whitespace=fix "${CMAKE_CURRENT_SOURCE_DIR}/fix.patch"
-  UPDATE_DISCONNECTED ON
+  PATCH_COMMAND ${CMAKE_COMMAND}
+  -D PATCH_FILE=${PATCH_FILE}
+  -D SOURCE_DIR=<SOURCE_DIR>
+  -P ${CMAKE_SOURCE_DIR}/cmake/apply_patch.cmake
 )
 
 # Declare ImGuiColorTextEdit

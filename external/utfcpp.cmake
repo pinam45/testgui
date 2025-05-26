@@ -19,14 +19,10 @@ list(APPEND CMAKE_MESSAGE_INDENT "  ")
 # Download
 FetchContent_Populate(
   utfcpp
-  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/utfcpp-src"
-  BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/utfcpp-build"
-  SUBBUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/utfcpp-subbuild"
   GIT_REPOSITORY "https://github.com/nemtrif/utfcpp"
   GIT_TAG "v4.0.5"
   GIT_SHALLOW ON
   GIT_PROGRESS ON
-  UPDATE_DISCONNECTED ON
 )
 
 # Import

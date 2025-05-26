@@ -19,14 +19,10 @@ list(APPEND CMAKE_MESSAGE_INDENT "  ")
 # Download
 FetchContent_Populate(
   pegtl
-  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/pegtl-src"
-  BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/pegtl-build"
-  SUBBUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/pegtl-subbuild"
   GIT_REPOSITORY "https://github.com/taocpp/PEGTL"
   GIT_TAG "3.2.7"
   GIT_SHALLOW ON
   GIT_PROGRESS ON
-  UPDATE_DISCONNECTED ON
 )
 
 # Import

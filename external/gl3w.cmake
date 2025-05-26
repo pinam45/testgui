@@ -16,18 +16,20 @@ endif()
 message(CHECK_START "external: configuring gl3w")
 list(APPEND CMAKE_MESSAGE_INDENT "  ")
 
+# Patch file path
+file(TO_CMAKE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/external/gl3w/fix.patch" PATCH_FILE)
+
 # Download
 FetchContent_Populate(
   gl3w
-  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/gl3w-src"
-  BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/gl3w-build"
-  SUBBUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/gl3w-subbuild"
   GIT_REPOSITORY "https://github.com/skaslev/gl3w"
   GIT_TAG "3a33275633ce4be433332dc776e6a5b3bdea6506"
-  #GIT_SHALLOW ON
+  GIT_SHALLOW ON
   GIT_PROGRESS ON
-  PATCH_COMMAND git apply --whitespace=fix "${CMAKE_CURRENT_SOURCE_DIR}/external/gl3w/fix.patch"
-  UPDATE_DISCONNECTED ON
+  PATCH_COMMAND ${CMAKE_COMMAND}
+  -D PATCH_FILE=${PATCH_FILE}
+  -D SOURCE_DIR=<SOURCE_DIR>
+  -P ${CMAKE_SOURCE_DIR}/cmake/apply_patch.cmake
 )
 
 # Import

@@ -19,14 +19,10 @@ list(APPEND CMAKE_MESSAGE_INDENT "  ")
 # Download
 FetchContent_Populate(
   tomlplusplus
-  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/tomlplusplus-src"
-  BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/tomlplusplus-build"
-  SUBBUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/tomlplusplus-subbuild"
   GIT_REPOSITORY "https://github.com/marzer/tomlplusplus"
   GIT_TAG "v3.4.0"
   GIT_SHALLOW ON
   GIT_PROGRESS ON
-  UPDATE_DISCONNECTED ON
 )
 
 # Import

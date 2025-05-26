@@ -12,14 +12,10 @@ set_source_files_properties(${global_generated_files_list} PROPERTIES GENERATED 
 # Download ImGuiNotify
 FetchContent_Populate(
   imguinotify
-  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/imguinotify-src"
-  BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/imguinotify-build"
-  SUBBUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_deps/imguinotify-subbuild"
   GIT_REPOSITORY "https://github.com/TyomaVader/ImGuiNotify"
   GIT_TAG "aee35595d9b91a47ca4e02427641b50f307b47bf"
   #GIT_SHALLOW ON
   GIT_PROGRESS ON
-  UPDATE_DISCONNECTED ON
 )
 
 # Move header to dedicated folder
