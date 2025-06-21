@@ -13,7 +13,7 @@ set_source_files_properties(${global_generated_files_list} PROPERTIES GENERATED 
 FetchContent_Populate(
   imgui
   GIT_REPOSITORY "https://github.com/ocornut/imgui"
-  GIT_TAG "v1.90.9-docking"
+  GIT_TAG "v1.91.9b-docking"
   GIT_SHALLOW ON
   GIT_PROGRESS ON
 )

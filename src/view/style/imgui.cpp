@@ -70,7 +70,7 @@ namespace
         colors[ImGuiCol_PlotHistogramHovered] = ImVec4(1.000f, 0.391f, 0.000f, 1.000f);
         colors[ImGuiCol_TextSelectedBg] = ImVec4(1.000f, 1.000f, 1.000f, 0.156f);
         colors[ImGuiCol_DragDropTarget] = ImVec4(1.000f, 0.391f, 0.000f, 1.000f);
-        colors[ImGuiCol_NavHighlight] = ImVec4(1.000f, 0.391f, 0.000f, 1.000f);
+        colors[ImGuiCol_NavCursor] = ImVec4(1.000f, 0.391f, 0.000f, 1.000f);
         colors[ImGuiCol_NavWindowingHighlight] = ImVec4(1.000f, 0.391f, 0.000f, 1.000f);
         colors[ImGuiCol_NavWindowingDimBg] = ImVec4(0.000f, 0.000f, 0.000f, 0.586f);
         colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.000f, 0.000f, 0.000f, 0.586f);
@@ -157,7 +157,7 @@ void style::setup_imgui() noexcept
     // colors[ImGuiCol_TableRowBgAlt] = TODO;
     colors[ImGuiCol_TextSelectedBg] = color::interface::panel_active;
     colors[ImGuiCol_DragDropTarget] = color::interface::background;
-    colors[ImGuiCol_NavHighlight] = color::interface::background;
+    colors[ImGuiCol_NavCursor] = color::interface::background;
     // colors[ImGuiCol_NavWindowingHighlight] = TODO;
     // colors[ImGuiCol_NavWindowingDimBg] = TODO;
     colors[ImGuiCol_ModalWindowDimBg] = color::interface::background;

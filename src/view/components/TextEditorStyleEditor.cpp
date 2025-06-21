@@ -159,7 +159,7 @@ void TextEditorStyleEditor::print() noexcept
 
         ImGui::BeginChild("##colors",
                           ImVec2(0, -(ImGui::GetFrameHeightWithSpacing() + ImGui::GetStyle().ItemSpacing.y)),
-                          ImGuiChildFlags_Border | ImGuiChildFlags_NavFlattened,
+                          ImGuiChildFlags_Borders | ImGuiChildFlags_NavFlattened,
                           ImGuiWindowFlags_AlwaysVerticalScrollbar);
         {
             SCOPE_EXIT

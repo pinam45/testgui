@@ -1426,7 +1426,7 @@ IconsFinder::IconsFinder() noexcept : _logger(logging::get_logger("IconsFinder")
 void IconsFinder::print() noexcept
 {
     ImGuiStyle& style = ImGui::GetStyle();
-    const float window_visible_x = ImGui::GetWindowPos().x + ImGui::GetWindowContentRegionMax().x;
+    const float window_visible_x = ImGui::GetWindowPos().x + ImGui::GetContentRegionAvail().x;
 
     filter.Draw();
     font::push(font::LARGE_FONT_SIZE);
