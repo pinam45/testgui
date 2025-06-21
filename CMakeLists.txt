@@ -109,6 +109,7 @@ include(implot)
 include(impop)
 include(imspinner)
 include(ImGuiColorTextEdit)
+include(ImGuiFileDialog)
 include(ImGuiNotify)
 include(nlohmann_json)
 include(spdlog)
@@ -154,6 +155,7 @@ target_link_libraries(
   impop::impop
   imspinner::imspinner
   ImGuiColorTextEdit::ImGuiColorTextEdit
+  ImGuiFileDialog::ImGuiFileDialog
   ImGuiNotify::ImGuiNotify
   nlohmann_json::nlohmann_json
   spdlog::spdlog
