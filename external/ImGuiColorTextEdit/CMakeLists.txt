@@ -15,8 +15,8 @@ file(TO_CMAKE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/fix.patch" PATCH_FILE)
 # Download ImGuiColorTextEdit
 FetchContent_Populate(
   imguicolortextedit
-  GIT_REPOSITORY "https://github.com/dfranx/ImGuiColorTextEdit"
-  GIT_TAG "fb08648c87f5c872c268e11708ee518d60ed3e8e"
+  GIT_REPOSITORY "https://github.com/goossens/ImGuiColorTextEdit"
+  GIT_TAG "81afc72cbe1b18384c0fe09711956d52e0c49fd4"
   GIT_SHALLOW ON
   GIT_PROGRESS ON
   PATCH_COMMAND ${CMAKE_COMMAND}
@@ -34,8 +34,6 @@ file(
   GLOB sources
   "${imguicolortextedit_SOURCE_DIR}/*.cpp"
   "${imguicolortextedit_SOURCE_DIR}/*.h"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h"
 )
 target_sources(ImGuiColorTextEdit PRIVATE ${sources})
 
@@ -43,14 +41,12 @@ target_sources(ImGuiColorTextEdit PRIVATE ${sources})
 target_include_directories(
   ImGuiColorTextEdit SYSTEM PUBLIC
   "${imguicolortextedit_SOURCE_DIR}"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src"
 )
 
 # Add dependencies
 target_link_libraries(
   ImGuiColorTextEdit PUBLIC
   imgui::imgui
-  SpvGenTwo::SpvGenTwoLib
 )
 
 # Configure

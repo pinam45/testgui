@@ -27,14 +27,15 @@ TextEditorStyleEditor::TextEditorStyleEditor(const TextEditor::Palette& text_edi
     , _example_editor()
     , _logger(logging::get_logger("StyleEditor"))
 {
-    _example_editor.SetReadOnly(true);
-    _example_editor.SetLanguageDefinition(TextEditor::LanguageDefinition::CPlusPlus());
+    _example_editor.SetReadOnlyEnabled(true);
+    _example_editor.SetLanguage(TextEditor::Language::Cpp());
     _example_editor.SetPalette(_text_editor_palette);
-    TextEditor::ErrorMarkers markers;
-    markers.insert(
-      std::make_pair<int, std::string>(6, "Example error here:\nInclude file not found: \"TextEditor.h\""));
-    markers.insert(std::make_pair<int, std::string>(41, "Another example error"));
-    _example_editor.SetErrorMarkers(markers);
+    // TextEditor::ErrorMarkers markers;
+    // markers.insert(
+    //   std::make_pair<int, std::string>(6, "Example error here:\nInclude file not found: \"TextEditor.h\""));
+    // markers.insert(std::make_pair<int, std::string>(41, "Another example error"));
+    // _example_editor.SetErrorMarkers(markers);
+    _example_editor.AddMarker(6, style::ImU32_from_bytes(249, 38, 114, 255), style::ImU32_from_bytes(249, 38, 114, 255), "magic 1", "magic 2");
     _example_editor.SetText(R"(
 /*
  * Block comment

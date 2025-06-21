@@ -26,7 +26,9 @@ public:
     sigslot::signal<style_info> style_changed;
 
     explicit TextEditorStyleEditor(
-      const TextEditor::Palette& text_editor_palette = style::color::text_editor::palette) noexcept;
+    const TextEditor::Palette& text_editor_palette = style::color::text_editor::palette) noexcept;
+    // explicit TextEditorStyleEditor(
+    //   const TextEditor::Palette& text_editor_palette = TextEditor::GetDarkPalette()) noexcept;
 
     TextEditorStyleEditor(const TextEditorStyleEditor&) = delete;
     TextEditorStyleEditor(TextEditorStyleEditor&&) noexcept = default;

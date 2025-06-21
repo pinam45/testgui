@@ -17,13 +17,12 @@
 
 TextEditorDemo::TextEditorDemo() noexcept
 {
-    _editor.SetLanguageDefinition(TextEditor::LanguageDefinition::CPlusPlus());
+    _editor.SetLanguage(TextEditor::Language::Cpp());
     _editor.SetPalette(style::color::text_editor::palette);
-    TextEditor::ErrorMarkers markers;
-    markers.insert(
-      std::make_pair<int, std::string>(6, "Example error here:\nInclude file not found: \"TextEditor.h\""));
-    markers.insert(std::make_pair<int, std::string>(41, "Another example error"));
-    _editor.SetErrorMarkers(markers);
+    // TextEditor::ErrorMarkers markers;
+    // markers.insert(
+    //   std::make_pair<int, std::string>(6, "Example error here:\nInclude file not found: \"TextEditor.h\""));
+    // markers.insert(std::make_pair<int, std::string>(41, "Another example error"));
     _editor.SetText(R"(
 /*
  * Block comment
@@ -91,11 +90,13 @@ namespace foo {
   Widget(T) -> Widget<typename T::value_type>;
 }
 )");
+    _editor.AddMarker(6, style::ImU32_from_bytes(249, 38, 114, 255), style::ImU32_from_bytes(249, 38, 114, 255), "magic 1", "magic 2");
+    assert(_editor.HasMarkers());
 }
 
 void TextEditorDemo::print() noexcept
 {
-    auto cpos = _editor.GetCursorPosition();
+    //auto cpos = _editor.GetCursorPosition();
     if(ImGui::BeginMenuBar())
     {
         if(ImGui::BeginMenu("File"))
@@ -109,9 +110,9 @@ void TextEditorDemo::print() noexcept
         }
         if(ImGui::BeginMenu("Edit"))
         {
-            bool ro = _editor.IsReadOnly();
+            bool ro = _editor.IsReadOnlyEnabled();
             if(ImGui::MenuItem("Read-only mode", nullptr, &ro))
-                _editor.SetReadOnly(ro);
+                _editor.SetReadOnlyEnabled(ro);
             ImGui::Separator();
 
             if(ImGui::MenuItem("Undo", "ALT-Backspace", nullptr, !ro && _editor.CanUndo()))
@@ -121,46 +122,46 @@ void TextEditorDemo::print() noexcept
 
             ImGui::Separator();
 
-            if(ImGui::MenuItem("Copy", "Ctrl-C", nullptr, _editor.HasSelection()))
-                _editor.Copy();
-            if(ImGui::MenuItem("Cut", "Ctrl-X", nullptr, !ro && _editor.HasSelection()))
-                _editor.Cut();
-            if(ImGui::MenuItem("Delete", "Del", nullptr, !ro && _editor.HasSelection()))
-                _editor.Delete();
-            if(ImGui::MenuItem("Paste", "Ctrl-V", nullptr, !ro && ImGui::GetClipboardText() != nullptr))
-                _editor.Paste();
+            // if(ImGui::MenuItem("Copy", "Ctrl-C", nullptr, _editor.HasSelection()))
+            //     _editor.Copy();
+            // if(ImGui::MenuItem("Cut", "Ctrl-X", nullptr, !ro && _editor.HasSelection()))
+            //     _editor.Cut();
+            // if(ImGui::MenuItem("Delete", "Del", nullptr, !ro && _editor.HasSelection()))
+            //     _editor.Delete();
+            // if(ImGui::MenuItem("Paste", "Ctrl-V", nullptr, !ro && ImGui::GetClipboardText() != nullptr))
+            //     _editor.Paste();
 
             ImGui::Separator();
 
             if(ImGui::MenuItem("Select all", nullptr, nullptr))
-                _editor.SetSelection(TextEditor::Coordinates(), TextEditor::Coordinates(_editor.GetTotalLines(), 0));
+                _editor.SelectAll();
 
             ImGui::EndMenu();
         }
 
         if(ImGui::BeginMenu("View"))
         {
-            if(ImGui::MenuItem("My palette"))
-                _editor.SetPalette(style::color::text_editor::palette);
+            // if(ImGui::MenuItem("My palette"))
+            //     _editor.SetPalette(style::color::text_editor::palette);
             if(ImGui::MenuItem("Dark palette"))
                 _editor.SetPalette(TextEditor::GetDarkPalette());
             if(ImGui::MenuItem("Light palette"))
                 _editor.SetPalette(TextEditor::GetLightPalette());
-            if(ImGui::MenuItem("Retro blue palette"))
-                _editor.SetPalette(TextEditor::GetRetroBluePalette());
+            // if(ImGui::MenuItem("Retro blue palette"))
+            //     _editor.SetPalette(TextEditor::GetRetroBluePalette());
             ImGui::EndMenu();
         }
         ImGui::EndMenuBar();
     }
 
-    ImGui::Text("%6d/%-6d %6d lines  | %s | %s | %s | %s",
-                cpos.mLine + 1,
-                cpos.mColumn + 1,
-                _editor.GetTotalLines(),
-                _editor.IsOverwrite() ? "Ovr" : "Ins",
-                _editor.CanUndo() ? "*" : " ",
-                _editor.GetLanguageDefinition().mName.c_str(),
-                "totallyafile.magic");
+    // ImGui::Text("%6d/%-6d %6d lines  | %s | %s | %s | %s",
+    //             cpos.mLine + 1,
+    //             cpos.mColumn + 1,
+    //             _editor.GetTotalLines(),
+    //             _editor.IsOverwrite() ? "Ovr" : "Ins",
+    //             _editor.CanUndo() ? "*" : " ",
+    //             _editor.GetLanguageDefinition().mName.c_str(),
+    //             "totallyafile.magic");
 
     ImFont* font = ImGui::GetFont();
     ImGui::PushFont(font);

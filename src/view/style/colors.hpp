@@ -144,74 +144,126 @@ namespace style
 
         namespace text_editor
         {
-            static constexpr std::array<std::string_view, static_cast<size_t>(TextEditor::PaletteIndex::Max)>
-              palette_color_name{"Default",
-                                 "Keyword",
-                                 "Number",
-                                 "String",
-                                 "Char literal",
-                                 "Punctuation",
-                                 "Preprocessor",
-                                 "Identifier",
-                                 "Known identifier",
-                                 "Preproc identifier",
-                                 "Comment (single line)",
-                                 "Comment (multi line)",
-                                 "Background",
-                                 "Cursor",
-                                 "Selection",
-                                 "ErrorMarker",
-                                 "Breakpoint",
-                                 "Breakpoint outline",
-                                 "Current line indicator",
-                                 "Current line indicator outline",
-                                 "Line number",
-                                 "Current line fill",
-                                 "Current line fill (inactive)",
-                                 "Current line edge",
-                                 "Error message",
-                                 "BreakpointDisabled",
-                                 "UserFunction",
-                                 "UserType",
-                                 "UniformType",
-                                 "GlobalVariable",
-                                 "LocalVariable",
-                                 "FunctionArgument"};
+            // static constexpr std::array<std::string_view, static_cast<size_t>(TextEditor::PaletteIndex::Max)>
+            //   palette_color_name{"Default",
+            //                      "Keyword",
+            //                      "Number",
+            //                      "String",
+            //                      "Char literal",
+            //                      "Punctuation",
+            //                      "Preprocessor",
+            //                      "Identifier",
+            //                      "Known identifier",
+            //                      "Preproc identifier",
+            //                      "Comment (single line)",
+            //                      "Comment (multi line)",
+            //                      "Background",
+            //                      "Cursor",
+            //                      "Selection",
+            //                      "ErrorMarker",
+            //                      "Breakpoint",
+            //                      "Breakpoint outline",
+            //                      "Current line indicator",
+            //                      "Current line indicator outline",
+            //                      "Line number",
+            //                      "Current line fill",
+            //                      "Current line fill (inactive)",
+            //                      "Current line edge",
+            //                      "Error message",
+            //                      "BreakpointDisabled",
+            //                      "UserFunction",
+            //                      "UserType",
+            //                      "UniformType",
+            //                      "GlobalVariable",
+            //                      "LocalVariable",
+            //                      "FunctionArgument"};
+            //
+            // static constexpr TextEditor::Palette palette = {
+            //   ImU32_from_bytes(255, 255, 255, 255), // Default
+            //   ImU32_from_bytes(249, 38, 114, 255), // Keyword
+            //   ImU32_from_bytes(174, 129, 255, 255), // Number
+            //   ImU32_from_bytes(230, 219, 116, 255), // String
+            //   ImU32_from_bytes(230, 219, 116, 255), // Char literal
+            //   ImU32_from_bytes(255, 255, 255, 255), // Punctuation
+            //   ImU32_from_bytes(249, 134, 72, 255), // Preprocessor
+            //   ImU32_from_bytes(255, 255, 255, 255), // Identifier
+            //   ImU32_from_bytes(166, 226, 46, 255), // Known identifier
+            //   ImU32_from_bytes(174, 129, 255, 255), // Preproc identifier
+            //   ImU32_from_bytes(128, 128, 128, 255), // Comment (single line)
+            //   ImU32_from_bytes(128, 128, 128, 255), // Comment (multi line)
+            //   ImU32_from_bytes(30, 31, 34, 255), // Background
+            //   ImU32_from_bytes(187, 187, 187, 255), // Cursor
+            //   ImU32_from_bytes(33, 66, 131, 255), // Selection
+            //   ImU32_from_bytes(105, 30, 28, 255), // ErrorMarker
+            //   ImU32_from_bytes(255, 0, 0, 255), // Breakpoint
+            //   ImU32_from_bytes(255, 255, 255, 255), // Breakpoint outline
+            //   ImU32_from_bytes(255, 216, 29, 255), // Current line indicator
+            //   ImU32_from_bytes(105, 105, 105, 255), // Current line indicator outline
+            //   ImU32_from_bytes(96, 99, 102, 255), // Line number
+            //   ImU32_from_bytes(50, 50, 50, 255), // Current line fill
+            //   ImU32_from_bytes(50, 50, 50, 255), // Current line fill (inactive)
+            //   ImU32_from_bytes(50, 50, 50, 255), // Current line edge
+            //   ImU32_from_bytes(255, 255, 51, 255), // Error message
+            //   ImU32_from_bytes(255, 255, 255, 255), // BreakpointDisabled
+            //   ImU32_from_bytes(255, 198, 109, 255), // UserFunction
+            //   ImU32_from_bytes(102, 217, 239, 255), // UserType
+            //   ImU32_from_bytes(209, 79, 249, 255), // UniformType
+            //   ImU32_from_bytes(166, 226, 46, 255), // GlobalVariable
+            //   ImU32_from_bytes(255, 255, 255, 255), // LocalVariable
+            //   ImU32_from_bytes(204, 120, 50, 255), // FunctionArgument
+            // };
+
+            static constexpr std::array<std::string_view, static_cast<size_t>(TextEditor::Color::count)>
+              palette_color_name{"text",
+                                 "keyword",
+                                 "declaration",
+                                 "number",
+                                 "string",
+                                 "punctuation",
+                                 "preprocessor",
+                                 "identifier",
+                                 "known identifier",
+                                 "comment",
+                                 "background",
+                                 "cursor",
+                                 "selection",
+                                 "whitespace",
+                                 "matchingBracketBackground",
+                                 "matchingBracketActive",
+                                 "matchingBracketLevel1",
+                                 "matchingBracketLevel2",
+                                 "matchingBracketLevel3",
+                                 "matchingBracketError",
+                                 "line number",
+                                 "current line number"};
 
             static constexpr TextEditor::Palette palette = {
-              ImU32_from_bytes(255, 255, 255, 255), // Default
-              ImU32_from_bytes(249, 38, 114, 255), // Keyword
-              ImU32_from_bytes(174, 129, 255, 255), // Number
-              ImU32_from_bytes(230, 219, 116, 255), // String
-              ImU32_from_bytes(230, 219, 116, 255), // Char literal
-              ImU32_from_bytes(255, 255, 255, 255), // Punctuation
-              ImU32_from_bytes(249, 134, 72, 255), // Preprocessor
-              ImU32_from_bytes(255, 255, 255, 255), // Identifier
-              ImU32_from_bytes(166, 226, 46, 255), // Known identifier
-              ImU32_from_bytes(174, 129, 255, 255), // Preproc identifier
-              ImU32_from_bytes(128, 128, 128, 255), // Comment (single line)
-              ImU32_from_bytes(128, 128, 128, 255), // Comment (multi line)
-              ImU32_from_bytes(30, 31, 34, 255), // Background
-              ImU32_from_bytes(187, 187, 187, 255), // Cursor
-              ImU32_from_bytes(33, 66, 131, 255), // Selection
-              ImU32_from_bytes(105, 30, 28, 255), // ErrorMarker
-              ImU32_from_bytes(255, 0, 0, 255), // Breakpoint
-              ImU32_from_bytes(255, 255, 255, 255), // Breakpoint outline
-              ImU32_from_bytes(255, 216, 29, 255), // Current line indicator
-              ImU32_from_bytes(105, 105, 105, 255), // Current line indicator outline
-              ImU32_from_bytes(96, 99, 102, 255), // Line number
-              ImU32_from_bytes(50, 50, 50, 255), // Current line fill
-              ImU32_from_bytes(50, 50, 50, 255), // Current line fill (inactive)
-              ImU32_from_bytes(50, 50, 50, 255), // Current line edge
-              ImU32_from_bytes(255, 255, 51, 255), // Error message
-              ImU32_from_bytes(255, 255, 255, 255), // BreakpointDisabled
-              ImU32_from_bytes(255, 198, 109, 255), // UserFunction
-              ImU32_from_bytes(102, 217, 239, 255), // UserType
-              ImU32_from_bytes(209, 79, 249, 255), // UniformType
-              ImU32_from_bytes(166, 226, 46, 255), // GlobalVariable
-              ImU32_from_bytes(255, 255, 255, 255), // LocalVariable
-              ImU32_from_bytes(204, 120, 50, 255), // FunctionArgument
+              {
+               ImU32_from_bytes(255, 255, 255, 255), // text
+                ImU32_from_bytes(249, 38, 114, 255), // keyword
+                ImU32_from_bytes(249, 38, 114, 255), // declaration
+                ImU32_from_bytes(174, 129, 255, 255), // number
+                ImU32_from_bytes(230, 219, 116, 255), // string
+                ImU32_from_bytes(255, 255, 255, 255), // punctuation
+                ImU32_from_bytes(249, 134, 72, 255), // preprocessor
+                ImU32_from_bytes(255, 255, 255, 255), // identifier
+                ImU32_from_bytes(166, 226, 46, 255), // known identifier
+                ImU32_from_bytes(128, 128, 128, 255), // comment
+                ImU32_from_bytes(30, 31, 34, 255), // background
+                ImU32_from_bytes(187, 187, 187, 255), // cursor
+                ImU32_from_bytes(33, 66, 131, 255), // selection
+                ImU32_from_bytes(80, 80, 80, 255), // whitespace
+                ImU32_from_bytes(100, 100, 0, 255), // matchingBracketBackground
+                ImU32_from_bytes(235, 235, 0, 255), // matchingBracketActive
+                ImU32_from_bytes(255, 255, 255, 255), // matchingBracketLevel1
+                ImU32_from_bytes(255, 255, 255, 255), // matchingBracketLevel2
+                ImU32_from_bytes(255, 255, 255, 255), // matchingBracketLevel3
+                ImU32_from_bytes(198, 8, 32, 255), // matchingBracketError
+                ImU32_from_bytes(128, 128, 144, 255), // line number
+                ImU32_from_bytes(224, 224, 240, 255), // current line number
+              }
             };
+
         } // namespace text_editor
 
         namespace log

@@ -18,7 +18,6 @@ list(APPEND CMAKE_MESSAGE_INDENT "  ")
 
 # Dependencies
 include(${CMAKE_CURRENT_SOURCE_DIR}/external/imgui.cmake)
-include(${CMAKE_CURRENT_SOURCE_DIR}/external/SpvGenTwo.cmake)
 
 # Custom CMake project
 add_subdirectory(
