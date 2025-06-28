@@ -13,7 +13,7 @@ set_source_files_properties(${global_generated_files_list} PROPERTIES GENERATED 
 FetchContent_Populate(
   imspinner
   GIT_REPOSITORY "https://github.com/dalerank/imspinner"
-  GIT_TAG "ff2eb8c3230debc878db689c9113498a7de97804"
+  GIT_TAG "5e9b1c235a207a73df2b566aa7f373f0746126fe"
   GIT_PROGRESS ON
 )
 
